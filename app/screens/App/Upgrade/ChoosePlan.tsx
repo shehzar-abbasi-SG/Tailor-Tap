@@ -70,11 +70,9 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
            alwaysBounceVertical
            horizontal={false}
            showsHorizontalScrollIndicator={false} 
-           contentContainerStyle={{ flexGrow: 1,paddingTop:60,paddingBottom:20, paddingHorizontal: 40}}
+           contentContainerStyle={{ flexGrow: 1,paddingTop:60,paddingBottom:20}}
            showsVerticalScrollIndicator={false}
-           style={{
-            marginHorizontal: -40, // Cancel out parent's horizontal padding
-          }}
+          
           >
             <View className='flex items-center w-full gap-y-[20px]'>
               {choosePlans.map((plan)=>(
