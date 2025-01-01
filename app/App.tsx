@@ -22,8 +22,6 @@ export default function App() {
       InterBold: require("../assets/fonts/Inter-Bold.ttf"),
       InterMedium: require("../assets/fonts/Inter-Medium.ttf"),
       InterSemiBold: require("../assets/fonts/Inter-SemiBold.ttf"),
-
-
     });
     setFontsLoaded(true);
   };

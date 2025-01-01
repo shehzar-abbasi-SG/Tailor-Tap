@@ -11,6 +11,11 @@ export type AuthStackParamList = {
     Measurements: undefined;
     Congratulations:undefined
   };
+  export type SearchStackParamList = {
+    SearchMain: undefined;
+    EditDetail: undefined;
+    EditPhotos: undefined;
+  };
 
   export type UpgradeStackParamList = {
     Plan:undefined;

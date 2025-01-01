@@ -1,8 +1,4 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { createContext, useContext, useState } from 'react';
-import { MeasurementStackParamList } from '../types/navigation';
-import { measurementRoutes } from '@/app/constant/measurement';
-import { StackNavigationProp } from '@react-navigation/stack';
 
 type ClientDetailFormData = {
     fullName: string;
@@ -25,7 +21,6 @@ type ClientDetailFormData = {
 type FormContextType = {
   formData: ClientDetailFormData;
   setFormData: React.Dispatch<React.SetStateAction<ClientDetailFormData>>;
-  goNext:(_currentScreen: keyof MeasurementStackParamList)=>void
 };
 
 export type PartialClientDetailFormData =  Partial<ClientDetailFormData>
@@ -49,21 +44,9 @@ export const ClientDetailFormProvider: React.FC<{ children: React.ReactNode }> =
     paincha:"",
     additionalInformation:""
   });
-  const navigation = useNavigation<StackNavigationProp<MeasurementStackParamList>>();
-
-  const goNext = (currentScreen: keyof MeasurementStackParamList) => {
-    const currentIndex = measurementRoutes.indexOf(currentScreen);
-    if (currentIndex >= 0 && currentIndex < measurementRoutes.length - 1) {
-      const nextScreen = measurementRoutes[currentIndex + 1];
-      navigation.navigate(nextScreen);
-    } else {
-      console.warn("No next screen available.");
-    }
-  };
-
 
   return (
-    <ClientDetailFormContext.Provider value={{ formData, setFormData,goNext }}>
+    <ClientDetailFormContext.Provider value={{ formData, setFormData }}>
       {children}
     </ClientDetailFormContext.Provider>
   );

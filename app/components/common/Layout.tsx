@@ -11,7 +11,7 @@ function Layout({children,scrollable=true}:ILayoutProps) {
       <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
           {scrollable ? (
                 <ScrollView 
-                    contentContainerStyle={{ flexGrow: 1 }}
+                    contentContainerStyle={{ flexGrow: 1,paddingBottom:50 }}
                     showsVerticalScrollIndicator={false}
                 >
                     {children}

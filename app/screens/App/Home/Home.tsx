@@ -46,7 +46,10 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
           </Box>
           <View className="w-full">
             <Text className="font-[InterBold] text-[21px] font-bold leading-[25px] mt-[26px] w-full">My Clients</Text>
-            <ScrollView className="">
+            <ScrollView 
+             contentContainerStyle={{ flexGrow: 1,paddingBottom:80 }}
+             showsVerticalScrollIndicator={false}
+            >
                 {clients.length===0 && 
                 <>
                 <Image
