@@ -20,7 +20,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#38D55B"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.shehzarabbasisg.tailortap"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -29,7 +33,10 @@
       "**/*"
     ],
     "extra": {
-      "fonts": "./assets/fonts"
+      "fonts": "./assets/fonts",
+      "eas": {
+        "projectId": "6b648379-a58c-447b-8bca-e1dbbf54827e"
+      }
     },
     "plugins": [
       [
