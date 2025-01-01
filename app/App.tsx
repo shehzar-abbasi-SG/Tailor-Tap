@@ -6,11 +6,11 @@ import SplashScreen from "@/app/screens/Splash"
 import * as Font from "expo-font";
 import "react-native-gesture-handler";
 import NavigationContainer  from "@/app/components/navigation/Navigation";
+import { AppProvider } from "./context/AppProvider";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // This will control routing 
 
   const loadFonts = async () => {
     await Font.loadAsync({
@@ -50,7 +50,9 @@ export default function App() {
   }
   return (
       <GluestackUIProvider mode="light">
-        <NavigationContainer isAuthenticated={isAuthenticated}/>
+        <AppProvider>
+          <NavigationContainer/>
+        </AppProvider>
       </GluestackUIProvider>
     )
 }

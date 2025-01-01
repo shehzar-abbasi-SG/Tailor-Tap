@@ -2,37 +2,16 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import MainNavigator from "./MainNavigation";
 import AuthNavigator from "./AuthNavigation";
-
-
-// const linking = {
-//   prefixes: ['yourapp://'],
-//   config: {
-//     screens: {
-//       Home: {
-//         screens: {
-//           HomeMain: 'home',
-//           ClientDetails: 'home/client-details',
-//           Measurement: 'home/measurement',
-//         },
-//       },
-//       Search: {
-//         screens: 'Search'
-//       },
-//       Search: {
-//         screens: 'Search'
-//       },
-//     },
-//   },
-// };
+import { useAppContext } from "@/app/context/AppProvider";
+import UpgradeNavigation from "./UpgradeNavigation";
 
 type TNavigationProps={
-  isAuthenticated:boolean
 }
-export default function Navigation({isAuthenticated}:TNavigationProps) {
-
+export default function Navigation({}:TNavigationProps) {
+  const {isAuthenticated,showUpgradeStack} = useAppContext()
   return (
-    <NavigationContainer > 
-      {isAuthenticated? <MainNavigator/>: <AuthNavigator/>}
+    <NavigationContainer> 
+      {isAuthenticated? showUpgradeStack?<UpgradeNavigation/>:<MainNavigator/>: <AuthNavigator/>}
     </NavigationContainer>
   );
 }

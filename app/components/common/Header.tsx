@@ -6,10 +6,10 @@ import { Image } from '../ui/image';
 
 interface IHeader{
     onBackPress:()=>void
-    onVideoPress:()=>void
-    displayMode?:"Measurements"|"ClientDetails"
+    onVideoPress?:()=>void
+    displayMode?:"Measurements"|"ClientDetails"|"Upgrade"
 }
-const Header = ({ onBackPress, onVideoPress,displayMode }:IHeader) => {
+const Header = ({ onBackPress, onVideoPress=()=>{},displayMode }:IHeader) => {
   return (
     <View className='flex flex-row justify-between px-10 items-center'>
       {displayMode==="Measurements"?
@@ -22,6 +22,10 @@ const Header = ({ onBackPress, onVideoPress,displayMode }:IHeader) => {
         </TouchableOpacity>
       </>
       
+      :displayMode==="Upgrade"?
+       <TouchableOpacity onPress={onBackPress} className='bg-[#36BC54] rounded-full w-[30px] h-[30px] flex items-center justify-center'>
+          <AntDesignIcon name="close" size={20} color="#000" />
+        </TouchableOpacity>
       :
       <>
           <TouchableOpacity onPress={onBackPress}>

@@ -1026,6 +1026,19 @@
     "@react-native-aria/focus" "^0.2.9"
     "@react-native-aria/interactions" "0.2.13"
 
+"@gluestack-ui/modal@^0.1.35":
+  version "0.1.35"
+  resolved "https://registry.npmjs.org/@gluestack-ui/modal/-/modal-0.1.35.tgz"
+  integrity sha512-KfA2aJ/ZsdM5rggAAJOykVHsOZf7aYjTfDNsd5JHUC7Uo8IrQAZJBX1DEz+Y3V8dPMXEIlEFGMaVh4o29nZXcw==
+  dependencies:
+    "@gluestack-ui/hooks" "0.1.12"
+    "@gluestack-ui/overlay" "^0.1.16"
+    "@gluestack-ui/utils" "^0.1.14"
+    "@react-native-aria/dialog" "^0.0.4"
+    "@react-native-aria/focus" "^0.2.9"
+    "@react-native-aria/interactions" "0.2.13"
+    "@react-native-aria/overlays" "^0.3.12"
+
 "@gluestack-ui/nativewind-utils@^1.0.26":
   version "1.0.26"
   resolved "https://registry.npmjs.org/@gluestack-ui/nativewind-utils/-/nativewind-utils-1.0.26.tgz"
@@ -1259,6 +1272,18 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@legendapp/motion@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.npmjs.org/@legendapp/motion/-/motion-2.4.0.tgz"
+  integrity sha512-AAYpRLGvxGD5hIGl9sVHyoUufr66zoH82PuxYcKiPSMdCBI3jwZFWh6CuHjV1leRKVIRk2py1rSvIVabG8eqcw==
+  dependencies:
+    "@legendapp/tools" "2.0.1"
+
+"@legendapp/tools@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/@legendapp/tools/-/tools-2.0.1.tgz"
+  integrity sha512-Kxt0HWvWElRK6oybHRzcYxdgaKGwuaiRNreS7usW7QuHXRIHaH4yMcW2YNRG4DHE5fpefv+Bno/BohQcCE4FaA==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   dependencies:
@@ -1294,6 +1319,18 @@
     "@react-stately/checkbox" "^3.0.1"
     "@react-stately/toggle" "^3.2.1"
     "@react-types/checkbox" "^3.2.1"
+
+"@react-aria/dialog@*":
+  version "3.5.20"
+  resolved "https://registry.npmjs.org/@react-aria/dialog/-/dialog-3.5.20.tgz"
+  integrity sha512-l0GZVLgeOd3kL3Yj8xQW7wN3gn9WW3RLd/SGI9t7ciTq+I/FhftjXCWzXLlOCCTLMf+gv7eazecECtmoWUaZWQ==
+  dependencies:
+    "@react-aria/focus" "^3.19.0"
+    "@react-aria/overlays" "^3.24.0"
+    "@react-aria/utils" "^3.26.0"
+    "@react-types/dialog" "^3.5.14"
+    "@react-types/shared" "^3.26.0"
+    "@swc/helpers" "^0.5.0"
 
 "@react-aria/focus@^3.19.0", "@react-aria/focus@^3.2.3":
   version "3.19.0"
@@ -1339,7 +1376,7 @@
     "@react-types/shared" "^3.26.0"
     "@swc/helpers" "^0.5.0"
 
-"@react-aria/overlays@^3.7.0":
+"@react-aria/overlays@^3.24.0", "@react-aria/overlays@^3.7.0":
   version "3.24.0"
   resolved "https://registry.npmjs.org/@react-aria/overlays/-/overlays-3.24.0.tgz"
   integrity sha512-0kAXBsMNTc/a3M07tK9Cdt/ea8CxTAEJ223g8YgqImlmoBBYAL7dl5G01IOj67TM64uWPTmZrOklBchHWgEm3A==
@@ -1407,6 +1444,16 @@
     "@react-native-aria/toggle" "^0.2.8"
     "@react-native-aria/utils" "0.2.11"
     "@react-stately/toggle" "^3.2.1"
+
+"@react-native-aria/dialog@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.npmjs.org/@react-native-aria/dialog/-/dialog-0.0.4.tgz"
+  integrity sha512-l974yT9Z8KTSfY0rjaDNx5PsuGw50jRsdrkez+eP0P8ENx2uKHDzPPZDLo5XS5aiChFWbLaZFXp8rU0TRVOMmg==
+  dependencies:
+    "@react-aria/dialog" "*"
+    "@react-native-aria/utils" "0.2.11"
+    "@react-types/dialog" "*"
+    "@react-types/shared" "*"
 
 "@react-native-aria/focus@^0.2.9":
   version "0.2.9"
@@ -1867,6 +1914,14 @@
   dependencies:
     "@react-types/shared" "^3.26.0"
 
+"@react-types/dialog@*", "@react-types/dialog@^3.5.14":
+  version "3.5.14"
+  resolved "https://registry.npmjs.org/@react-types/dialog/-/dialog-3.5.14.tgz"
+  integrity sha512-OXWMjrALwrlgw8aHD8SeRm/s3tbAssdaEh2h73KUSeFau3fU3n5mfKv+WnFqsEaOtN261o48l7hTlS6615H9AA==
+  dependencies:
+    "@react-types/overlays" "^3.8.11"
+    "@react-types/shared" "^3.26.0"
+
 "@react-types/overlays@^3.4.0", "@react-types/overlays@^3.8.11":
   version "3.8.11"
   resolved "https://registry.npmjs.org/@react-types/overlays/-/overlays-3.8.11.tgz"
@@ -1874,7 +1929,7 @@
   dependencies:
     "@react-types/shared" "^3.26.0"
 
-"@react-types/shared@^3.26.0":
+"@react-types/shared@*", "@react-types/shared@^3.26.0":
   version "3.26.0"
   resolved "https://registry.npmjs.org/@react-types/shared/-/shared-3.26.0.tgz"
   integrity sha512-6FuPqvhmjjlpEDLTiYx29IJCbCNWPlsyO+ZUmCUXzhUv2ttShOXfw8CmeHWHftT/b2KweAWuzqSlfeXPR76jpw==
@@ -3285,6 +3340,18 @@ expo-font@^13.0.2, expo-font@~13.0.2:
   integrity sha512-H9FaXM7ZW5+EfV38w80BgJG3H17kB7CuVXwHoiszIYyoPfWz9bWesFe4QwNZjTq3pzKes28sSd8irFuflIrSIA==
   dependencies:
     fontfaceobserver "^2.1.0"
+
+expo-image-loader@~5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/expo-image-loader/-/expo-image-loader-5.0.0.tgz"
+  integrity sha512-Eg+5FHtyzv3Jjw9dHwu2pWy4xjf8fu3V0Asyy42kO+t/FbvW/vjUixpTjPtgKQLQh+2/9Nk4JjFDV6FwCnF2ZA==
+
+expo-image-picker@^16.0.3:
+  version "16.0.3"
+  resolved "https://registry.npmjs.org/expo-image-picker/-/expo-image-picker-16.0.3.tgz"
+  integrity sha512-c4IOqIQOtx8puWWU4fVsJhuGiAhH6gAIdrVzhimOXSEUHnfxCckRYzvznbd/0cuvaA5y9H0CSYrxpTUc/0WNVw==
+  dependencies:
+    expo-image-loader "~5.0.0"
 
 expo-keep-awake@~14.0.1:
   version "14.0.1"

@@ -11,6 +11,13 @@ export type AuthStackParamList = {
     Measurements: undefined;
     Congratulations:undefined
   };
+
+  export type UpgradeStackParamList = {
+    Plan:undefined;
+    Account:undefined;
+    AccountInfo:undefined;
+    Congratulations:undefined
+  }
   export type MeasurementStackParamList = {
     Length: undefined;
     Shoulder: undefined;
