@@ -31,7 +31,7 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
         <ChooseLanguage languageSelectionView={showLanguageSelectionView} closeLanguageSelectionView={closeLanguageSelectionView}/>
       :
       <>
-        <Header onBackPress={()=>{}} onVideoPress={()=>{}}/>
+        <Header onBackPress={()=>{}} onVideoPress={()=>setShowUpgradeModal(true)}/>
         <View style={styles.container}>
           <TouchableHighlight onPress={()=>navigation.navigate('ClientForm')} underlayColor={"#38D55B"} className="w-full">
             <Box className="bg-[#38D55B] h-[138px] w-full max-w-[400px] rounded-[7px] flex items-center gap-y-[22px] p-5">

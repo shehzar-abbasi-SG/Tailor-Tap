@@ -11,6 +11,7 @@ import { Input, InputField } from '@/app/components/ui/input';
 import Layout from "@/app/components/common/Layout";
 import { formatPhone } from "@/app/utils/format";
 import { PartialClientDetailFormData, useClientDetailFormContext } from '@/app/context/FormContext';
+import { useAppContext } from '@/app/context/AppProvider';
 
 
 type ClientFormScreenNavigationProp = StackNavigationProp<HomeStackParamList, 'ClientForm'>;
@@ -20,6 +21,8 @@ interface IClientFormNavigationProps {
   }
 const ClientFormScreen = ({navigation}:IClientFormNavigationProps) => {
   const {setFormData} = useClientDetailFormContext()
+  const {setShowUpgradeModal} = useAppContext()
+  
   const schema = Yup.object({
     fullName: Yup.string().required('Name is required.'),
     cast: Yup.string().required("Cast is required"),
@@ -33,7 +36,7 @@ const ClientFormScreen = ({navigation}:IClientFormNavigationProps) => {
   })
   return (
     <Layout>
-      <Header onBackPress={()=>navigation.goBack()} onVideoPress={()=>{}}/>
+      <Header onBackPress={()=>navigation.goBack()} onVideoPress={()=>setShowUpgradeModal(true)}/>
       <View style={styles.container}>
         <Heading title='Client Detail' className='w-[160px]' titleStyles='font-[InterBold] text-[21px] leading-[25px]' underlineStyles='mt-1'/>
         <View className='w-full mt-[30px]'>
