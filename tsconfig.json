@@ -6,6 +6,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "skipLibCheck": true, //This is important line 
     "baseUrl": "./",
     "paths": {
       "@/*": [

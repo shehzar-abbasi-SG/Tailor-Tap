@@ -12,7 +12,7 @@ import Button from '@/app/components/common/Button'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { UpgradeStackParamList } from '@/app/types/navigation'
 import { Image } from '@/app/components/ui/image'
-import AntDesignIcon from "react-native-vector-icons/AntDesign"
+import AntDesignIcon from "@expo/vector-icons/AntDesign"
 
 const chooseAccount = [
     { id: '1', name: 'JazzCash',image:require("@/assets/jazzcash_logo.png")},

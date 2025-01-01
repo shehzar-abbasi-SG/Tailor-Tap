@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight } from "react-native";
 import Heading from "./common/Heading";
-import AntDesignIcon from "react-native-vector-icons/AntDesign"
-import IonIcons from "react-native-vector-icons/Ionicons"
+import AntDesignIcon from "@expo/vector-icons/AntDesign"
+import IonIcons from "@expo/vector-icons/Ionicons"
 import { Button, ButtonIcon, ButtonSpinner, ButtonText } from "./ui/button";
 
 

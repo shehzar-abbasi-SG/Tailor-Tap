@@ -3,7 +3,7 @@ import { View, StyleSheet,Text, TouchableHighlight } from "react-native";
 import ChooseLanguage from "@/app/components/ChooseLanguage";
 import Layout from "@/app/components/common/Layout";
 import { Box } from "@/app/components/ui/box";
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import AntDesignIcon from '@expo/vector-icons/AntDesign';
 import { ScrollView } from "react-native-gesture-handler";
 import { Image } from "@/app/components/ui/image";
 import { StackNavigationProp } from "@react-navigation/stack";

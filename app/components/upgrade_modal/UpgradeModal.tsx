@@ -4,7 +4,7 @@ import Button from '../common/Button'
 import { Box } from '../ui/box'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { Image } from '../ui/image'
-import AntDesignIcon from "react-native-vector-icons/AntDesign"
+import AntDesignIcon from "@expo/vector-icons/AntDesign"
 
 interface IUpgradeModals{
   showModal:boolean

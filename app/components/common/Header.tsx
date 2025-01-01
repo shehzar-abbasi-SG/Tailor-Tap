@@ -1,7 +1,7 @@
 
 import { View, TouchableOpacity } from 'react-native';
-import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
-import AntDesignIcon from "react-native-vector-icons/AntDesign"
+import FontAwesomeIcons from '@expo/vector-icons/FontAwesome';
+import AntDesignIcon from "@expo/vector-icons/AntDesign"
 import { Image } from '../ui/image';
 
 interface IHeader{

@@ -8,7 +8,7 @@ import Heading from '@/app/components/common/Heading'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
 import { PartialUpgradeFormData, useUpgradePlanFormContext } from '@/app/context/UpgradePlanFormContext'
-import AntDesignIcon from "react-native-vector-icons/AntDesign"
+import AntDesignIcon from "@expo/vector-icons/AntDesign"
 import { ScrollView } from 'react-native-gesture-handler'
 import Button from '@/app/components/common/Button'
 import { StackNavigationProp } from '@react-navigation/stack'

@@ -1,14 +1,12 @@
 import React from 'react'
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "@/app/screens/App/Home/Home";
-import SearchScreen from "@/app/screens/App/Search/Search";
 import SettingsScreen from "@/app/screens/App/Settings";
 import ProfileScreen from "@/app/screens/App/Profile";
 import { StyleSheet,View } from 'react-native';
-import FoundationIcons from "react-native-vector-icons/Foundation";
-import IonIcons from "react-native-vector-icons/Ionicons";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import OctIcons from "react-native-vector-icons/Octicons";
+import FoundationIcons from "@expo/vector-icons/Foundation";
+import IonIcons from "@expo/vector-icons/Ionicons";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import OctIcons from "@expo/vector-icons/Octicons";
 import HomeNavigation from './HomeNavigation';
 import SearchNavigation from './SearchNavigation';
 

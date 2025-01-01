@@ -5,7 +5,7 @@ import Header from "@/app/components/common/Header";
 import Button from "@/app/components/common/Button";
 import { ScrollView } from 'react-native';
 import { Input, InputField } from "@/app/components/ui/input";
-import AntDesignIcon from "react-native-vector-icons/AntDesign"
+import AntDesignIcon from "@expo/vector-icons/AntDesign"
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SearchStackParamList } from "@/app/types/navigation";
 

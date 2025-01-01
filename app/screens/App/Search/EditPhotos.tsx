@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Pressable, TouchableHighlight } from "react-native";
 import Layout from "@/app/components/common/Layout";
 import Header from "@/app/components/common/Header";
@@ -9,9 +9,8 @@ import {SearchStackParamList } from "@/app/types/navigation";
 import * as Yup from "yup"
 import { useFormik } from "formik";
 import { Image } from '@/app/components/ui/image'
-import { Input, InputField } from '@/app/components/ui/input';
 import * as ImagePicker from 'expo-image-picker';
-import AntDesignIcon from "react-native-vector-icons/AntDesign"
+import AntDesignIcon from "@expo/vector-icons/AntDesign"
 
 const selectedPerson = 
     {name:"Person's Name",phone:"0334 567 7890",}

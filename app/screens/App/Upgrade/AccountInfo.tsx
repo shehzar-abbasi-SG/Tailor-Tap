@@ -12,7 +12,6 @@ import Button from '@/app/components/common/Button'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { UpgradeStackParamList } from '@/app/types/navigation'
 import { Image } from '@/app/components/ui/image'
-// import AntDesignIcon from "react-native-vector-icons/AntDesign"
 import { Input, InputField } from '@/app/components/ui/input';
 import * as ImagePicker from 'expo-image-picker';
 
