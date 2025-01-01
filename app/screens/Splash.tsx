@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Logo from "../../assets/logo.svg"
+import Logo from "@/assets/images/logo.svg"
 
 const SplashScreen = () => {
   return (

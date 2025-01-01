@@ -22,7 +22,7 @@ interface IMeasurementNavigationProps {
 
 const MeasurementScreenCollar =({navigation}:IMeasurementNavigationProps)=> {
     
-    const {setFormData,goNext} = useClientDetailFormContext()
+    const {setFormData} = useClientDetailFormContext()
     
   return (
     <Layout>
@@ -31,7 +31,7 @@ const MeasurementScreenCollar =({navigation}:IMeasurementNavigationProps)=> {
       <Heading title='Measurements' className='w-[180px]' titleStyles='font-[InterBold] text-[21px] leading-[25px]' underlineStyles='mt-1'/>
       <Button className="self-center rounded-[3px] w-[90px] h-[34px]" buttonTextStyles="text-[13px] leading-[15px] font-bold font-[InterBold] uppercase p-0" onPress={()=>{}} title="Collar"/>
        <Image
-          source={require('@/assets/collar_measurement.png')}
+          source={require('@/assets/images/collar_measurement.png')}
           alt="length measurement"
           className="w-full h-auto mt-5 "
           resizeMode="contain" 

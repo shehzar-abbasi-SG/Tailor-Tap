@@ -29,7 +29,7 @@ function UpgradeModal({showModal,setShowModal,onClickUpgrade}:IUpgradeModals) {
         <ModalBody>
           <Box className='flex gap-y-[23px] items-center justify-center'>
             <Image
-              source={require('@/assets/file-upload.png')}
+              source={require('@/assets/images/file-upload.png')}
               alt="File Upload"
               className="w-full h-auto"
               resizeMode="contain" 

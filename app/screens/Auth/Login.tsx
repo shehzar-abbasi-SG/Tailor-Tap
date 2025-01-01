@@ -23,7 +23,7 @@ const LoginScreen = ({navigation}:ILoginScreenProps) => {
     <Layout>
       <View className="flex-1 items-center px-10 bg-white">
       <Image
-          source={require('@/assets/logo-2.png')}
+          source={require('@/assets/images/logo-2.png')}
           alt="Logo"
           className="w-full h-auto mt-20"
           resizeMode="contain" 

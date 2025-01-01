@@ -34,7 +34,7 @@ const Header = ({ onBackPress, onVideoPress=()=>{},displayMode }:IHeader) => {
 
           <TouchableOpacity onPress={onVideoPress}>
               <Image
-                  source={require('@/assets/video_icon.png')}
+                  source={require('@/assets/images/video_icon.png')}
                   alt="Video Icon"
                   className="h-[41px] w-[41px]"
                   resizeMode="contain" 

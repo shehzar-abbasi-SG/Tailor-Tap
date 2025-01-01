@@ -109,7 +109,7 @@ function AccountInformation({navigation}:IUpgradeNavigationProps) {
                                     />
                                 :
                                   <Image
-                                    source={require("@/assets/placeholder_image.png")}
+                                    source={require("@/assets/images/placeholder_image.png")}
                                     alt="File Upload"
                                     className="w-full h-auto"
                                     resizeMode="contain" 

@@ -53,7 +53,7 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
                 {clients.length===0 && 
                 <>
                 <Image
-                  source={require('@/assets/no_clients.png')}
+                  source={require('@/assets/images/no_clients.png')}
                   alt="No Clients"
                   className="w-full h-auto"
                   resizeMode="contain" 

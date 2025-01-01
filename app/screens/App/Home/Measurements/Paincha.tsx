@@ -31,7 +31,7 @@ const MeasurementScreenPaincha =({navigation}:IMeasurementNavigationProps)=> {
       <Heading title='Measurements' className='w-[180px]' titleStyles='font-[InterBold] text-[21px] leading-[25px]' underlineStyles='mt-1'/>
       <Button className="self-center rounded-[3px] w-[110px] h-[34px]" buttonTextStyles="text-[13px] leading-[15px] font-bold font-[InterBold] uppercase p-0" onPress={()=>{}} title="Paincha"/>
        <Image
-          source={require('@/assets/paincha_measurement.png')}
+          source={require('@/assets/images/paincha_measurement.png')}
           alt="length measurement"
           className="w-full h-auto mt-5 "
           resizeMode="contain" 

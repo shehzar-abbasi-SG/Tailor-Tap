@@ -15,8 +15,8 @@ import { Image } from '@/app/components/ui/image'
 import AntDesignIcon from "@expo/vector-icons/AntDesign"
 
 const chooseAccount = [
-    { id: '1', name: 'JazzCash',image:require("@/assets/jazzcash_logo.png")},
-    { id: '2', name: 'EasyPaisa',image:require("@/assets/easypaisa_logo.png")},
+    { id: '1', name: 'JazzCash',image:require("@/assets/images/jazzcash_logo.png")},
+    { id: '2', name: 'EasyPaisa',image:require("@/assets/images/easypaisa_logo.png")},
     { id: '3', name: 'Placeholder',image:""},
   ];
   type UpgradeStackNavigationProp = StackNavigationProp<UpgradeStackParamList>;

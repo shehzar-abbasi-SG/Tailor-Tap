@@ -80,7 +80,7 @@ const validationSchema = Yup.object({
                             boxShadow:"0px 2px 8.2px 0px #0000004D"
                         }}>
                             <Image
-                            source={require("@/assets/placeholder_image.png")}
+                            source={require("@/assets/images/placeholder_image.png")}
                             alt="File Upload"
                             className="w-full h-auto"
                             resizeMode="contain" 
