@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#38D55B",
     rowGap:12,
     padding:40,
-    marginTop:20
   },
   animation: {
     width: 300,

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet,Text, TouchableHighlight } from "react-native";
-import ChooseLanguage from "@/app/components/ChooseLanguage";
+import ChooseLanguage from "@/app/screens/App/Home/ChooseLanguage";
 import Layout from "@/app/components/common/Layout";
 import { Box } from "@/app/components/ui/box";
 import AntDesignIcon from '@expo/vector-icons/AntDesign';

@@ -48,7 +48,7 @@ const SearchScreen = ({navigation}:ISearchNavigationProps) => {
               showsVerticalScrollIndicator={false}
             >
             {persons.map((person,index)=>(
-              <View key={index} className="flex flex-row justify-between items-center w-full border-b border-[#DCDCDC] py-[18px]">
+              <View key={index} className={`flex flex-row justify-between items-center w-full ${index===persons.length-1? "":"border-b"}  border-[#DCDCDC] py-[18px]`}>
                 <View className="flex flex-col gap-y-1">
                   <Text>{person.name}</Text>
                   <Text>{person.phone}</Text>

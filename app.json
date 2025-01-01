@@ -22,6 +22,7 @@
         "backgroundColor": "#38D55B"
       },
       "permissions": [
+        "android.permission.RECORD_AUDIO",
         "android.permission.RECORD_AUDIO"
       ],
       "package": "com.shehzarabbasisg.tailortap"
@@ -45,6 +46,12 @@
           "photosPermission": "Allow access to your photos to upload screenshots"
         }
       ]
-    ]
+    ],
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/6b648379-a58c-447b-8bca-e1dbbf54827e"
+    }
   }
 }

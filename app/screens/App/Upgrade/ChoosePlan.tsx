@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableHighlight, View } from 'react-native'
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import Layout from '@/app/components/common/Layout'
 import Header from '@/app/components/common/Header'
 import { useAppContext } from '@/app/context/AppProvider'
@@ -45,8 +45,8 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
     });
   return (
     <Layout scrollable={false}>
-      <View className='relative'>
-        <View className='w-full flex items-end z-10 pt-4'>
+      <View className='relative' style={styles.container}>
+        <View className='w-full flex items-end z-10 absolute right-0 top-5'>
           <Header displayMode='Upgrade' onBackPress={()=>{setShowUpgradeStack(false)}}/>
         </View>
         <View className='flex items-center justify-center gap-y-4 absolute inset-0 bg-[#38D55B] rounded-b-[82px] h-[260px]'>
@@ -67,10 +67,16 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
           <Heading title='Choose Your Plan:' className='w-[300px]' 
           titleStyles='font-[PoppinsBold] font-bold text-[29px] leading-[43px] uppercase' underlineStyles='mt-1'/>
           <ScrollView 
-           contentContainerStyle={{ flexGrow: 1,paddingTop:60 }}
+           alwaysBounceVertical
+           horizontal={false}
+           showsHorizontalScrollIndicator={false} 
+           contentContainerStyle={{ flexGrow: 1,paddingTop:60,paddingBottom:20, paddingHorizontal: 40}}
            showsVerticalScrollIndicator={false}
+           style={{
+            marginHorizontal: -40, // Cancel out parent's horizontal padding
+          }}
           >
-            <View className='flex items-center w-full gap-y-[20px] px-10'>
+            <View className='flex items-center w-full gap-y-[20px]'>
               {choosePlans.map((plan)=>(
                 <TouchableHighlight underlayColor="#D5E8D6" 
                   onPress={()=>setFieldValue("selectedPlan",plan.id)} key={plan.id} 
@@ -96,7 +102,7 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
                 </View>
               }
             </View>
-            <View className='px-10 w-full pt-[50px]'>
+            <View className='w-full pt-[50px]'>
               <Button 
                   className="mt-0 h-[72px] rounded-[4px] w-full" 
                   buttonTextStyles="text-[22px] leading-[33px] uppercase p-0" 
@@ -108,5 +114,16 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
     </Layout>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding:40,
+    overflow:'visible',
+  },
+ 
+});
 
 export default ChoosePlan
