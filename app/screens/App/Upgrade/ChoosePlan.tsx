@@ -66,14 +66,21 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
         <View className='w-full flex items-center justify-center pt-[280px]'>
           <Heading title='Choose Your Plan:' className='w-[300px]' 
           titleStyles='font-[PoppinsBold] font-bold text-[29px] leading-[43px] uppercase' underlineStyles='mt-1'/>
-          <ScrollView 
-           alwaysBounceVertical
-           horizontal={false}
-           showsHorizontalScrollIndicator={false} 
-           contentContainerStyle={{ flexGrow: 1,paddingTop:60,paddingBottom:20}}
-           showsVerticalScrollIndicator={false}
-          
-          >
+         <ScrollView
+            horizontal={false} // Prevent horizontal scrolling
+            showsHorizontalScrollIndicator={false} // No horizontal scroll indicator
+            showsVerticalScrollIndicator={false} // No vertical scroll indicator
+            scrollEnabled={true} // Vertical scroll only
+            overScrollMode="never" // Disable over-scroll (Android only)
+            contentContainerStyle={{
+              flexGrow: 1,
+              paddingTop: 60,
+              paddingBottom: 20,
+            }}
+            style={{
+              overflow: 'hidden',
+              paddingHorizontal:20 // Ensure content stays inside bounds
+            }}>
             <View className='flex items-center w-full gap-y-[20px]'>
               {choosePlans.map((plan)=>(
                 <TouchableHighlight underlayColor="#D5E8D6" 
