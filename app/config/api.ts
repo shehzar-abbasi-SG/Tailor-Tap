@@ -4,10 +4,11 @@ import EventEmitter from 'events';
 
 export const eventEmitter = new EventEmitter();
 
+//http://localhost:8000/
 //https://tailortap-server.onrender.com/
 // Create an Axios instance
 export const api = axios.create({
-  baseURL: 'http://localhost:8000/',
+  baseURL: 'https://tailortap-server.onrender.com/',
   timeout: 5000,
 });
 
