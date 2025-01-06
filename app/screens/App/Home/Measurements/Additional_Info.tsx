@@ -66,7 +66,7 @@ const MeasurementScreenAdditionalInfo =({navigation}:IMeasurementNavigationProps
               </View>
               <View className='flex gap-y-[16px]'>
                 <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} className="mt-0 h-[50px] rounded-[7px]" buttonTextStyles="text-[22px] leading-[33px] uppercase p-0" onPress={()=>handleSubmit()} title="Done"/>
-                <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} className="mt-0 bg-transparent h-[50px] rounded-[7px] border-[#38D55B] border-[2px]" buttonTextStyles="text-[22px] leading-[33px] uppercase text-[#38D55B] p-0" onPress={()=>{createCustomer({...formData})}} title="Skip"/>
+                <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} className="mt-0 bg-transparent h-[50px] rounded-[7px] border-[#38D55B] border-[2px] disabled:bg-transparent " buttonTextStyles="text-[22px] leading-[33px] uppercase text-[#38D55B] p-0" onPress={()=>{createCustomer({...formData})}} title="Skip"/>
               </View>
             </>
           )}

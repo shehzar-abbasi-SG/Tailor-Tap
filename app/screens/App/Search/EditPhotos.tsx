@@ -66,7 +66,7 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
       try {
           await deleteCustomerImage(selectedCustomer._id, imageToRemove);
         } catch (error) {
-          console.error("Error removing server image:", error);
+          console.log("Error removing server image:", error);
           return;
       }
      }
@@ -99,6 +99,7 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
       setFieldValue("images",[...values.images, ...uris]);
       setUpdateClientFormData((prev)=>({...prev,images:uris}))
   };
+
 
   return (
     <Layout scrollable={false}>
@@ -168,7 +169,7 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
                   <Button isDisabled={isCustomerLoading} onPress={closeModal} title="Cancel" 
                       className="mt-0 h-[45px] rounded-[4px] bg-gray-400 disabled:bg-gray-400" 
                       buttonTextStyles="text-[16px] leading-[24px] uppercase p-0" />
-                  <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} onPress={()=>{if(selectedImageIdToRemove)handleRemoveImage(selectedImageIdToRemove)}} title="Delete" 
+                  <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} onPress={()=>{if(selectedImageIdToRemove!=undefined)handleRemoveImage(selectedImageIdToRemove)}} title="Delete" 
                       className="mt-0 h-[45px] rounded-[4px] bg-red-500 disabled:bg-red-300" 
                       buttonTextStyles="text-[16px] leading-[24px] uppercase p-0" />
               </View>

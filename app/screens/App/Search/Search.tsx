@@ -33,7 +33,6 @@ const SearchScreen = ({navigation}:ISearchNavigationProps) => {
     },
     []
   );
-
   useEffect(() => {
     if (query) {
       debouncedSearch(query);

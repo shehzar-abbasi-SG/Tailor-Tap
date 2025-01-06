@@ -125,7 +125,7 @@ const EditProfileScreen = ({navigation}:IProfileNavigationProps) => {
                                 className="h-[66px] rounded-[7px]" 
                                 buttonTextStyles="text-[22px] uppercase" 
                                 onPress={()=>handleSubmit()} 
-                                title="Next"
+                                title="Submit"
                             />
                         </View>
                     )}}

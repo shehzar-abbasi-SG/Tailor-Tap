@@ -39,6 +39,7 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
         } catch (error) {
         }
       };
+      console.log('calling :>> ');
       fetchUserDetails();
       getCustomers()
 

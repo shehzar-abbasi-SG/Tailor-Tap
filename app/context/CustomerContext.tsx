@@ -166,7 +166,7 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
       showToast({ type: 'success', message: 'Image deleted successfully.' });
     } catch (error) {
-      console.error('Error deleting customer image:', error);
+      console.log('Error deleting customer image:', error);
       handleError(error, 'Failed to delete image');
     } finally {
       setIsCustomerLoading(false);
@@ -207,7 +207,10 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       showToast({ type: 'error', message: 'An unexpected error occurred' });
     }
   };
-
+  useEffect(()=>{
+    if(!customers) return
+    setFilteredCustomers(customers)
+  },[customers])
   return (
     <CustomerContext.Provider
       value={{
