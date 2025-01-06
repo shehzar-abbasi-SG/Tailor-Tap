@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-type ClientDetailFormData = {
+export type ClientDetailFormData = {
     fullName: string;
     cast: string;
     phoneNumber: string;
@@ -17,10 +17,25 @@ type ClientDetailFormData = {
     paincha:string;
     additionalInformation:string
 };
+export type ClientUpdateFormData = {
+  length:string;
+  shoulder:string
+  arms:string;
+  cuffs:string;
+  collar:string
+  chest:string;
+  fitting:string;
+  lap:string;
+  pant:string;
+  paincha:string;
+  images:string[]
+};
 
 type FormContextType = {
   formData: ClientDetailFormData;
   setFormData: React.Dispatch<React.SetStateAction<ClientDetailFormData>>;
+  updateClientFormData: Partial<ClientUpdateFormData>
+  setUpdateClientFormData: React.Dispatch<React.SetStateAction<Partial<ClientUpdateFormData>>>
 };
 
 export type PartialClientDetailFormData =  Partial<ClientDetailFormData>
@@ -44,9 +59,10 @@ export const ClientDetailFormProvider: React.FC<{ children: React.ReactNode }> =
     paincha:"",
     additionalInformation:""
   });
+  const [updateClientFormData, setUpdateClientFormData] = useState<Partial<ClientUpdateFormData>>({});
 
   return (
-    <ClientDetailFormContext.Provider value={{ formData, setFormData }}>
+    <ClientDetailFormContext.Provider value={{ formData, setFormData,updateClientFormData,setUpdateClientFormData }}>
       {children}
     </ClientDetailFormContext.Provider>
   );

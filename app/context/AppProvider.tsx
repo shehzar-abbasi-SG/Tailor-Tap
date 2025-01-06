@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 type AppContextType = {
   showUpgradeModal: boolean;
@@ -7,18 +7,20 @@ type AppContextType = {
   setIsAuthenticated:React.Dispatch<React.SetStateAction<boolean>>
   showUpgradeStack: boolean
   setShowUpgradeStack: React.Dispatch<React.SetStateAction<boolean>>
+  isLoading:boolean
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // This will control routing 
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // This will control routing 
   const [showUpgradeStack, setShowUpgradeStack] = useState(false)
+  const [isLoading,setIsLoading] = useState(false)
 
 
   return (
-    <AppContext.Provider value={{ showUpgradeModal, setShowUpgradeModal,isAuthenticated,setIsAuthenticated,showUpgradeStack,setShowUpgradeStack }}>
+    <AppContext.Provider value={{ showUpgradeModal, setShowUpgradeModal,isAuthenticated,setIsAuthenticated,showUpgradeStack,setShowUpgradeStack,isLoading }}>
       {children}
     </AppContext.Provider>
   );

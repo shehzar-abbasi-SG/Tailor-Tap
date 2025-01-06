@@ -14,6 +14,8 @@ import { Grid, GridItem } from '@/app/components/ui/grid';
 import { Checkbox, CheckboxIcon, CheckboxIndicator, CheckboxLabel } from "@/app/components/ui/checkbox";
 import { CheckIcon } from "@/app/components/ui/icon";
 import { formatPhone } from "@/app/utils/format";
+import { SignupCredentials } from "@/app/types/auth";
+import { useAuth } from "@/app/context/AuthContext";
 
 
 type SignupScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'Signup'>;
@@ -23,6 +25,7 @@ interface ISignupProps {
 }
 
 const SignupScreen = ({navigation}:ISignupProps) => {
+  const {signup,isLoading} = useAuth()
 
   return (
     <Layout>
@@ -35,7 +38,7 @@ const SignupScreen = ({navigation}:ISignupProps) => {
           />
           <Heading title="Sign up" className="w-[144px] mt-[60px]" titleStyles="text-[36px] leading-[54px] font-bold font-[PoppinsBold]" underlineStyles="mt-[-5px]"/>
           <Formik
-            initialValues={{ firstName: '', lastName: '',email:"",phoneNumber:"",password:"" ,agreeToPrivacyPolicy:false}}
+            initialValues={{ firstName: '', lastName: '',email:"",phoneNumber:"",password:"" ,agreeToPrivacyPolicy:false} as SignupCredentials}
             validationSchema={Yup.object({
               firstName: Yup.string().required('First Name is required.'),
               lastName: Yup.string().required('Last Name is required.'),
@@ -53,10 +56,10 @@ const SignupScreen = ({navigation}:ISignupProps) => {
                 .required('You must agree to the privacy policy'),
             })}
             onSubmit={(values) => {
-              console.log(values);
+              signup(values)
             }}>
             {({ handleChange, handleBlur, handleSubmit, setFieldValue,values, errors, touched }) => (
-              <View className="flex justify-center gap-y-5 w-full mt-[60px]">
+              <View className="flex justify-center w-full mt-[60px]">
                   <Grid
                     className="gap-[22px]"
                     _extra={{
@@ -219,14 +222,13 @@ const SignupScreen = ({navigation}:ISignupProps) => {
                               <View className="flex flex-row items-center">
                                   <Text className="font-[PoppinsRegular] font-normal text-base text-[#818181]">I Agree with</Text>
                                   <LinkButton variant="link" className="mx-1 h-fit" onPress={()=>{
-                                    console.log('go to privacy page')
                                     }}>
                                   <ButtonText className="text-[#F92424] font-[PoppinsRegular] font-normal text-base">
                                       privacy
                                   </ButtonText>
                                   </LinkButton> 
                                   <Text className="font-[PoppinsRegular] font-normal text-base text-[#818181]">and</Text> 
-                                  <LinkButton variant="link" className="mx-1 h-fit" onPress={()=>{console.log('go to policy page')}}>
+                                  <LinkButton variant="link" className="mx-1 h-fit" onPress={()=>{}}>
                                   <ButtonText className="text-[#F92424] font-[PoppinsRegular] font-normal text-base">
                                     policy
                                   </ButtonText>
@@ -243,9 +245,18 @@ const SignupScreen = ({navigation}:ISignupProps) => {
                     <GridItem _extra={{
                       className:"col-span-8"
                     }}>
-                      <Button className="rounded-full h-[58px]" buttonTextStyles="normal-case text-[20px]" onPress={()=>handleSubmit()} title="Sign up"/>
+                      <Button isLoading={isLoading} className="rounded-full h-[58px]" buttonTextStyles="normal-case text-[20px]" onPress={()=>handleSubmit()} title="Sign up"/>
+                    </GridItem>
+                    <GridItem _extra={{className:"col-span-8"}}>
+                     
                     </GridItem>
                   </Grid>
+                  <View className="flex flex-row items-center justify-between gap-x-[20px] px-3">
+                    <Text className="text-[18px] font-normal font-[PoppinsRegular] leading-[27px] text-[#818181]">Already have an account?</Text>
+                    <LinkButton variant="link" onPress={()=>navigation.goBack()}>
+                      <ButtonText className="font-[PoppinsMedium] font-medium text-[19px] text-right text-[#F92424] underline">Log in</ButtonText>
+                    </LinkButton>
+                  </View>
               </View>
               )}
           </Formik>
@@ -254,16 +265,6 @@ const SignupScreen = ({navigation}:ISignupProps) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-  },
-  text: {
-    fontSize: 18,
-  },
-});
+
 
 export default SignupScreen;

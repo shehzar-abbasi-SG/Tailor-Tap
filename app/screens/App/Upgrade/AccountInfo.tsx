@@ -37,7 +37,6 @@ function AccountInformation({navigation}:IUpgradeNavigationProps) {
         .required('Screenshot is required')
         }),
         onSubmit: (values) => {
-        console.log('Form Submitted:', values);
         setFormData((prev)=>({...prev,...values}))
         navigation.navigate("Congratulations")
         },

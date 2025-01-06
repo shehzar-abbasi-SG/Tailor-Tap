@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet,Text, TouchableHighlight } from "react-native";
 import ChooseLanguage from "@/app/screens/App/Home/ChooseLanguage";
 import Layout from "@/app/components/common/Layout";
@@ -7,24 +7,42 @@ import AntDesignIcon from '@expo/vector-icons/AntDesign';
 import { ScrollView } from "react-native-gesture-handler";
 import { Image } from "@/app/components/ui/image";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { HomeStackParamList } from "@/app/types/navigation";
+import { HomeScreenNavigationProp, HomeStackParamList } from "@/app/types/navigation";
 import Header from "@/app/components/common/Header";
-import UpgradeModal from "@/app/components/upgrade_modal/UpgradeModal";
+import UpgradeModal from "@/app/components/modals/UpgradeModal";
 import { useAppContext } from "@/app/context/AppProvider";
+import { useUser } from "@/app/context/UserContext";
+import { getAuthData } from "@/app/utils/auth";
+import { useCustomer } from "@/app/context/CustomerContext";
+import { Spinner } from "@/app/components/ui/spinner";
 
 
-type HomeScreenNavigationProp = StackNavigationProp<HomeStackParamList, 'HomeMain'>;
 
 interface IHomeNavigationProps {
     navigation: HomeScreenNavigationProp;
   }
 const HomeScreen = ({navigation}:IHomeNavigationProps) => {
-    const [showLanguageSelectionView,setShowLanguageSelectionView] = useState(true)
+    const [showLanguageSelectionView,setShowLanguageSelectionView] = useState(false)
     const closeLanguageSelectionView =()=>{
         setShowLanguageSelectionView(false)
     }
-    const {showUpgradeModal,setShowUpgradeModal,setShowUpgradeStack} = useAppContext()
-    const clients = []
+    const {showUpgradeModal,setShowUpgradeModal,setShowUpgradeStack,isAuthenticated} = useAppContext()
+    const {getUserDetails} = useUser()
+    const {customers,getCustomers,isCustomerLoading} = useCustomer()
+    useEffect(() => {
+      if(!isAuthenticated) return
+      const fetchUserDetails = async () => {
+        try {
+          const authData = await getAuthData();
+          if(!authData) return
+          await getUserDetails(authData.userId);
+        } catch (error) {
+        }
+      };
+      fetchUserDetails();
+      getCustomers()
+
+    }, [isAuthenticated]);
   return (
     <Layout scrollable={false}>
       {showLanguageSelectionView?
@@ -46,23 +64,38 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
           </Box>
           <View className="w-full">
             <Text className="font-[InterBold] text-[21px] font-bold leading-[25px] mt-[26px] w-full">My Clients</Text>
-            <ScrollView 
-             contentContainerStyle={{ flexGrow: 1,paddingBottom:80 }}
-             showsVerticalScrollIndicator={false}
-            >
-                {clients.length===0 && 
-                <>
-                <Image
-                  source={require('@/assets/images/no_clients.png')}
-                  alt="No Clients"
-                  className="w-full h-auto"
-                  resizeMode="contain" 
-                />
-                <Text className="text-sm font-medium font-[PoppinsMedium] text-[#A1A1A1] text-center mt-[-50px]">No Client has been created yet..</Text>
-                </>
-                } 
+            {isCustomerLoading? 
+              <View className="mt-[100px]">
+                <Spinner />
+              </View>
+            :
+              <ScrollView 
+              contentContainerStyle={{ flexGrow: 1,paddingBottom:80 }}
+              showsVerticalScrollIndicator={false}
+              >
+                  {customers && customers.length>0 ?
+                    customers.map((customer,index)=>(
+                      <View key={customer._id} className={`flex flex-row justify-between items-center w-full ${index===customers.length-1 ? "" :"border-b"}  border-[#DCDCDC] py-[18px]`}>
+                        <View className="flex flex-col gap-y-1">
+                          <Text>{customer.fullName}</Text>
+                          <Text>{customer.phoneNumber}</Text>
+                        </View>
+                      </View>
+                    ))
+                  : 
+                    <>
+                      <Image
+                        source={require('@/assets/images/no_clients.png')}
+                        alt="No Clients"
+                        className="w-full h-auto"
+                        resizeMode="contain" 
+                      />
+                      <Text className="text-sm font-medium font-[PoppinsMedium] text-[#A1A1A1] text-center mt-[-50px]">No Client has been created yet..</Text>
+                    </>
+                  } 
 
-            </ScrollView>
+              </ScrollView>
+            }
           </View>
         </View>
         {/* Plan upgrade modal */}
@@ -77,7 +110,6 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
     rowGap:34,

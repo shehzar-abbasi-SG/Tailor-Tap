@@ -42,7 +42,6 @@ const MeasurementScreenCuffs =({navigation}:IMeasurementNavigationProps)=> {
                 cuffs: Yup.string().required('Invalid measurement')
             })}
           onSubmit={(values) => {
-            console.log(values);
             setFormData((prev)=>(
               {...prev,...values}
             ))

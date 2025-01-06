@@ -38,7 +38,6 @@ function ChooseAccount({navigation}:IUpgradeNavigationProps) {
         selectedBankAccount: Yup.string().required('Bank account selection is required'),
       }),
       onSubmit: (values) => {
-        console.log('Form Submitted:', values);
         setFormData((prev)=>({...prev,...values}))
         navigation.navigate("AccountInfo")
       },
@@ -61,7 +60,6 @@ function ChooseAccount({navigation}:IUpgradeNavigationProps) {
                 <TouchableHighlight underlayColor="#D5E8D6" 
                   onPress={()=> {
                     if(account.name==="Placeholder"){
-                        console.log("another option")
                     }else setFieldValue("selectedBankAccount",account.id)
                   }} key={account.id} 
                   className={`flex flex-row items-center justify-between gap-x-[37px] relative

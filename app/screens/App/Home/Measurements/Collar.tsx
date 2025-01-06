@@ -42,7 +42,6 @@ const MeasurementScreenCollar =({navigation}:IMeasurementNavigationProps)=> {
                 collar: Yup.string().required('Invalid measurement')
             })}
           onSubmit={(values) => {
-            console.log(values);
             setFormData((prev)=>(
               {...prev,...values}
             ))

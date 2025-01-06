@@ -42,7 +42,6 @@ const MeasurementScreenPaincha =({navigation}:IMeasurementNavigationProps)=> {
                 paincha: Yup.string().required('Invalid measurement')
             })}
           onSubmit={(values) => {
-            console.log(values);
             setFormData((prev)=>(
               {...prev,...values}
             ))

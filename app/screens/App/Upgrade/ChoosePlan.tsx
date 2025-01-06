@@ -38,7 +38,6 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
         selectedPlan: Yup.string().required('Plan selection is required'),
       }),
       onSubmit: (values) => {
-        console.log('Form Submitted:', values);
         setFormData((prev)=>({...prev,...values}))
         navigation.navigate("Account")
       },
@@ -67,11 +66,11 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
           <Heading title='Choose Your Plan:' className='w-[300px]' 
           titleStyles='font-[PoppinsBold] font-bold text-[29px] leading-[43px] uppercase' underlineStyles='mt-1'/>
          <ScrollView
-            horizontal={false} // Prevent horizontal scrolling
-            showsHorizontalScrollIndicator={false} // No horizontal scroll indicator
-            showsVerticalScrollIndicator={false} // No vertical scroll indicator
-            scrollEnabled={true} // Vertical scroll only
-            overScrollMode="never" // Disable over-scroll (Android only)
+            horizontal={false} 
+            showsHorizontalScrollIndicator={false} 
+            showsVerticalScrollIndicator={false} 
+            scrollEnabled={true} 
+            overScrollMode="never"
             contentContainerStyle={{
               flexGrow: 1,
               paddingTop: 60,

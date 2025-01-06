@@ -42,7 +42,6 @@ const MeasurementScreenFitting =({navigation}:IMeasurementNavigationProps)=> {
                 fitting: Yup.string().required('Invalid measurement')
             })}
           onSubmit={(values) => {
-            console.log(values);
             setFormData((prev)=>(
               {...prev,...values}
             ))

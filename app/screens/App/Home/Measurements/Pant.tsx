@@ -42,7 +42,6 @@ const MeasurementScreenPant =({navigation}:IMeasurementNavigationProps)=> {
                 pant: Yup.string().required('Invalid measurement')
             })}
           onSubmit={(values) => {
-            console.log(values);
             setFormData((prev)=>(
               {...prev,...values}
             ))

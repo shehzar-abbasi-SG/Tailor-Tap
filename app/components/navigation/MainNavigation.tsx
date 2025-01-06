@@ -1,7 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SettingsScreen from "@/app/screens/App/Settings";
-import ProfileScreen from "@/app/screens/App/Profile";
 import { StyleSheet,View } from 'react-native';
 import FoundationIcons from "@expo/vector-icons/Foundation";
 import IonIcons from "@expo/vector-icons/Ionicons";
@@ -9,6 +8,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import OctIcons from "@expo/vector-icons/Octicons";
 import HomeNavigation from './HomeNavigation';
 import SearchNavigation from './SearchNavigation';
+import ProfileNavigation from './ProfileNavigation';
 
 const MainStack = createBottomTabNavigator();
 
@@ -48,7 +48,7 @@ function MainNavigator() {
     <MainStack.Screen name="HomeTab" component={HomeNavigation} />
     <MainStack.Screen name="Search" component={SearchNavigation} />
     <MainStack.Screen name="Settings" component={SettingsScreen} />
-    <MainStack.Screen name="Profile" component={ProfileScreen} />
+    <MainStack.Screen name="Profile" component={ProfileNavigation} />
   </MainStack.Navigator>
   )
 }

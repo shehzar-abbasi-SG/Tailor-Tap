@@ -3,15 +3,17 @@ import { View, TouchableOpacity } from 'react-native';
 import FontAwesomeIcons from '@expo/vector-icons/FontAwesome';
 import AntDesignIcon from "@expo/vector-icons/AntDesign"
 import { Image } from '../ui/image';
+import { twMerge } from 'tailwind-merge';
 
 interface IHeader{
-    onBackPress:()=>void
-    onVideoPress?:()=>void
-    displayMode?:"Measurements"|"ClientDetails"|"Upgrade"
+    onBackPress:()=>void;
+    onVideoPress?:()=>void;
+    displayMode?:"Measurements"|"ClientDetails"|"Upgrade";
+    className?:string
 }
-const Header = ({ onBackPress, onVideoPress=()=>{},displayMode }:IHeader) => {
+const Header = ({ onBackPress, onVideoPress=()=>{},displayMode,className='' }:IHeader) => {
   return (
-    <View className='flex flex-row justify-between px-10 items-center'>
+    <View className={twMerge('flex flex-row justify-between px-10 items-center',className)}>
       {displayMode==="Measurements"?
       <>
         <TouchableOpacity onPress={onBackPress} className='bg-[#36BC54] rounded-full w-[22px] h-[22px] flex items-center justify-center'>

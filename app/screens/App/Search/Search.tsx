@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Layout from "@/app/components/common/Layout";
 import Header from "@/app/components/common/Header";
@@ -8,24 +8,45 @@ import { Input, InputField } from "@/app/components/ui/input";
 import AntDesignIcon from "@expo/vector-icons/AntDesign"
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SearchStackParamList } from "@/app/types/navigation";
-
-const persons = [
-  {name:"Person's Name",phone:"0334 567 7890",},
-  {name:"Person's Name",phone:"0334 567 7890",},
-  {name:"Person's Name",phone:"0334 567 7890",},
-  {name:"Person's Name",phone:"0334 567 7890",},
-  {name:"Person's Name",phone:"0334 567 7890",},
-  {name:"Person's Name",phone:"0334 567 7890",},
-  {name:"Person's Name",phone:"0334 567 7890",}
-]
+import { useCustomer } from "@/app/context/CustomerContext";
+import { Spinner } from "@/app/components/ui/spinner";
 
 type SearchScreenNavigationProp = StackNavigationProp<SearchStackParamList>;
 
 interface ISearchNavigationProps {
     navigation: SearchScreenNavigationProp;
-  }
+}
+
 const SearchScreen = ({navigation}:ISearchNavigationProps) => {
   const [query,setQuery] = useState("")
+  const {customers,isCustomerLoading,searchCustomers,filteredCustomers,setFilteredCustomers,getCustomerById} = useCustomer()
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const debouncedSearch = useCallback(
+    (query: string) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current); 
+      }
+      timeoutRef.current = setTimeout(() => {
+        searchCustomers(query); 
+      }, 1000);
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (query) {
+      debouncedSearch(query);
+    }else{
+      setFilteredCustomers(customers)
+    }
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [query, debouncedSearch]);
+
   return (
     <Layout scrollable={false}>
         <Header onBackPress={()=>{}}/>
@@ -47,16 +68,27 @@ const SearchScreen = ({navigation}:ISearchNavigationProps) => {
               contentContainerStyle={{ flexGrow: 1,paddingTop:48 }}
               showsVerticalScrollIndicator={false}
             >
-            {persons.map((person,index)=>(
-              <View key={index} className={`flex flex-row justify-between items-center w-full ${index===persons.length-1? "":"border-b"}  border-[#DCDCDC] py-[18px]`}>
-                <View className="flex flex-col gap-y-1">
-                  <Text>{person.name}</Text>
-                  <Text>{person.phone}</Text>
-                </View>
-                <Button onPress={()=>{navigation.navigate("EditDetail")}} title="Edit" className="mt-0 h-[39px] rounded-[6px]" 
-                buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"  />
+            {isCustomerLoading?
+              <View className="mt-[100px]">
+                <Spinner />
               </View>
-            ))}
+            :
+            <>
+              {filteredCustomers && filteredCustomers.map((customer,index)=>(
+                <View key={index} className={`flex flex-row justify-between items-center w-full ${index===filteredCustomers.length-1? "":"border-b"}  border-[#DCDCDC] py-[18px]`}>
+                  <View className="flex flex-col gap-y-1">
+                    <Text>{customer.fullName}</Text>
+                    <Text>{customer.phoneNumber}</Text>
+                  </View>
+                  <Button onPress={()=>{
+                    getCustomerById(customer._id)
+                  }} 
+                  title="Edit" className="mt-0 h-[39px] rounded-[6px]" 
+                  buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"  />
+                </View>
+              ))}
+            </>
+            }
           </ScrollView>
         </View>
     </Layout>

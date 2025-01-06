@@ -41,7 +41,6 @@ const MeasurementScreenLength =({navigation}:IMeasurementNavigationProps)=> {
               length: Yup.string().required("Measurement is required")
             })}
           onSubmit={(values) => {
-            console.log(values);
             setFormData((prev)=>(
               {...prev,...values}
             ))

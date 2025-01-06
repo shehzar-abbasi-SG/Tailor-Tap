@@ -42,7 +42,6 @@ const MeasurementScreenShoulder =({navigation}:IMeasurementNavigationProps)=> {
               shoulder: Yup.string().required('Measurement is required')
             })}
           onSubmit={(values) => {
-            console.log(values);
             setFormData((prev)=>(
               {...prev,...values}
             ))

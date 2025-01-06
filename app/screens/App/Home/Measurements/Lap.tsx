@@ -42,7 +42,7 @@ const MeasurementScreenLap =({navigation}:IMeasurementNavigationProps)=> {
                 lap: Yup.string().required('Invalid measurement')
             })}
           onSubmit={(values) => {
-            console.log(values);
+            (values);
             setFormData((prev)=>(
               {...prev,...values}
             ))

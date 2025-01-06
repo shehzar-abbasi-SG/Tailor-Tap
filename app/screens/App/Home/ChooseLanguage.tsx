@@ -23,7 +23,6 @@ const ChooseLanguage = ({closeLanguageSelectionView,languageSelectionView}:TChoo
     setSelectedLanguage(language!);
   };
   const handleContinue = ()=>{
-    console.log('continue ==>');
   }
   
   return (

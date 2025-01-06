@@ -42,7 +42,6 @@ const MeasurementScreenChest =({navigation}:IMeasurementNavigationProps)=> {
                 chest: Yup.string().required('Invalid measurement')
             })}
           onSubmit={(values) => {
-            console.log(values);
             setFormData((prev)=>(
               {...prev,...values}
             ))
