@@ -12,7 +12,8 @@ const AuthStack = createStackNavigator();
 function AuthNavigator() {
   return (
     <AuthStack.Navigator screenOptions={{
-      headerShown:false
+      headerShown:false,
+      animation:'slide_from_right'
     }}>
         <AuthStack.Screen name="Login" component={LoginScreen} />
         <AuthStack.Screen name="Signup" component={SignupScreen} />

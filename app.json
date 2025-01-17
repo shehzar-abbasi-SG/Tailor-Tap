@@ -45,7 +45,8 @@
         {
           "photosPermission": "Allow access to your photos to upload screenshots"
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "runtimeVersion": {
       "policy": "appVersion"

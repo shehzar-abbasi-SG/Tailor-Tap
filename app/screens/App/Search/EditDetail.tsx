@@ -12,17 +12,20 @@ import { useFormik } from "formik";
 import { useCustomer } from "@/app/context/CustomerContext";
 import { Spinner } from "@/app/components/ui/spinner";
 import { ClientDetailFormData, ClientUpdateFormData, useClientDetailFormContext } from "@/app/context/FormContext";
+import { useRoute } from '@react-navigation/native';
 
-
-const selectedPerson = 
-    {name:"Person's Name",phone:"0334 567 7890",}
 
 type SearchScreenNavigationProp = StackNavigationProp<SearchStackParamList>;
 
 interface ISearchNavigationProps {
-    navigation: SearchScreenNavigationProp;
+    navigation: any;
+
   }
 const EditDetail = ({navigation}:ISearchNavigationProps) => {
+    const route = useRoute();
+    const params:any = route.params
+
+    console.log('params.isEditMode ===> ', params.isEditMode);
 
     const validationSchema = Yup.object({
         shoulder: Yup.number(),
@@ -64,7 +67,9 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
             }
           }); 
         setUpdateClientFormData({...updatedValues})
-        navigation.navigate("EditPhotos")
+        navigation.navigate("EditPhotos", {
+            isEditMode: params?.isEditMode
+          })
         },
     });
   return (
@@ -77,10 +82,12 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                     <Text>{selectedCustomer?.fullName}</Text>
                     <Text>{selectedCustomer?.phoneNumber}</Text>
                     </View>
-                    <Button title="Edit" className="mt-0 h-[39px] rounded-[6px]" 
-                    buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"  />
+                    {params?.isEditMode && 
+                        <Button title="Edit" className="mt-0 h-[39px] rounded-[6px]" 
+                        buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"  />
+                    }
                 </View>
-                <Text className="text-[#36BC54] text-left self-start font-[PoppinsRegular] font-normal text-[17px] leading-[25.5px] mb-3 mt-[48px]">Detail</Text>
+                <Text className="text-[#36BC54] text-left self-start font-[PoppinsRegular] font-normal text-[17px] leading-[25.5px] mb-3 mt-[20px]">Detail</Text>
                 <View className="w-full border-[1px] border-[#DCDCDC]" />
                 {isCustomerLoading?
                     <View className="mt-[100px]">
@@ -96,6 +103,7 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                         <Input
                             variant="outline"
                             size="md"
+                            isReadOnly={!params?.isEditMode}
                             className="bg-[#E7E7E7] w-[114px] rounded-[5px] h-[43px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
                             >
                             <InputField
@@ -111,6 +119,7 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                         <Input
                             variant="outline"
                             size="md"
+                            isReadOnly={!params?.isEditMode}
                             className="bg-[#E7E7E7] w-[114px] rounded-[5px] h-[43px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
                             >
                             <InputField
@@ -126,6 +135,7 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                         <Input
                             variant="outline"
                             size="md"
+                            isReadOnly={!params?.isEditMode}
                             className="bg-[#E7E7E7] w-[114px] rounded-[5px] h-[43px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
                             >
                             <InputField
@@ -141,6 +151,7 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                         <Input
                             variant="outline"
                             size="md"
+                            isReadOnly={!params?.isEditMode}
                             className="bg-[#E7E7E7] w-[114px] rounded-[5px] h-[43px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
                             >
                             <InputField
@@ -156,6 +167,7 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                         <Input
                             variant="outline"
                             size="md"
+                            isReadOnly={!params?.isEditMode}
                             className="bg-[#E7E7E7] w-[114px] rounded-[5px] h-[43px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
                             >
                             <InputField
@@ -171,6 +183,7 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                         <Input
                             variant="outline"
                             size="md"
+                            isReadOnly={!params?.isEditMode}
                             className="bg-[#E7E7E7] w-[114px] rounded-[5px] h-[43px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
                             >
                             <InputField
@@ -186,6 +199,7 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                         <Input
                             variant="outline"
                             size="md"
+                            isReadOnly={!params?.isEditMode}
                             className="bg-[#E7E7E7] w-[114px] rounded-[5px] h-[43px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
                             >
                             <InputField
@@ -201,6 +215,7 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                         <Input
                             variant="outline"
                             size="md"
+                            isReadOnly={!params?.isEditMode}
                             className="bg-[#E7E7E7] w-[114px] rounded-[5px] h-[43px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
                             >
                             <InputField
@@ -216,6 +231,7 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                         <Input
                             variant="outline"
                             size="md"
+                            isReadOnly={!params?.isEditMode}
                             className="bg-[#E7E7E7] w-[114px] rounded-[5px] h-[43px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
                             >
                             <InputField
@@ -231,6 +247,7 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                         <Input
                             variant="outline"
                             size="md"
+                            isReadOnly={!params?.isEditMode}
                             className="bg-[#E7E7E7] w-[114px] rounded-[5px] h-[43px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
                             >
                             <InputField

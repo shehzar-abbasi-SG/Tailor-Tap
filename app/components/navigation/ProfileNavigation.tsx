@@ -13,7 +13,9 @@ function ProfileNavigation({}:IProfileNavigationProps) {
     return (
         <ProfileStack.Navigator 
             screenOptions={{
-                headerShown:false
+                headerShown:false,
+                animation:'slide_from_right',
+                gestureEnabled:true
             }}
         >
             <ProfileStack.Screen name="ProfileMain" component={ProfileScreen} />

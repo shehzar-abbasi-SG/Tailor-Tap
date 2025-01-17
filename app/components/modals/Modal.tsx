@@ -4,19 +4,21 @@ import Button from '../common/Button'
 import { Box } from '../ui/box'
 import { Text, TouchableOpacity, View } from 'react-native'
 import AntDesignIcon from "@expo/vector-icons/AntDesign"
+import { twMerge } from 'tailwind-merge'
 
 interface IUpgradeModals{
   showModal:boolean
   onClose:()=>void
   children:React.ReactNode
   className?:string
+  contentClassName?:string
 }
-function ModalWrapper({showModal,onClose,children,className=''}:IUpgradeModals) {
+function ModalWrapper({showModal,onClose,children,className='',contentClassName= " "}:IUpgradeModals) {
 
   return (
     <Modal isOpen={showModal} onClose={onClose} size="md" className={className} >
       <ModalBackdrop className="bg-[#000]" opacity={0.76}/>
-      <ModalContent className='rounded-[7px] px-3 py-3'>
+      <ModalContent className={twMerge('rounded-[7px] px-3 py-3',contentClassName)}>
         <ModalHeader>
           <View className='w-full'>
             <ModalCloseButton className='self-end'>

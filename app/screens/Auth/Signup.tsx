@@ -13,7 +13,6 @@ import Heading from "@/app/components/common/Heading"
 import { Grid, GridItem } from '@/app/components/ui/grid';
 import { Checkbox, CheckboxIcon, CheckboxIndicator, CheckboxLabel } from "@/app/components/ui/checkbox";
 import { CheckIcon } from "@/app/components/ui/icon";
-import { formatPhone } from "@/app/utils/format";
 import { SignupCredentials } from "@/app/types/auth";
 import { useAuth } from "@/app/context/AuthContext";
 
@@ -46,7 +45,7 @@ const SignupScreen = ({navigation}:ISignupProps) => {
               phoneNumber: Yup.string()
               .required('Phone number is required')
               .matches(
-                /^\(\d{3}\) \d{3}-\d{4}$/,
+                /^(?:\+?92|0)?3\d{2}[ -]?\d{7}$/,
                 'Phone number is not valid'
               ),
               password: Yup.string().min(6,'Password too short').required('Password is required.'),
@@ -164,8 +163,8 @@ const SignupScreen = ({navigation}:ISignupProps) => {
                             placeholder="Phone Number"
                             value={values.phoneNumber}
                             onChangeText={(number)=>{
-                              const formattedPhone = formatPhone(number);
-                              handleChange('phoneNumber')(formattedPhone)
+                              // const formattedPhone = formatPhoneNumber(number);
+                              handleChange('phoneNumber')(number)
                             }}
                             onBlur={handleBlur('phoneNumber')}
                             className="text-base placeholder:text-[#818181] placeholder:text-[20px] placeholder:font-normal placeholder:font-[PoppinsRegular] placeholder:leading-[30px]"

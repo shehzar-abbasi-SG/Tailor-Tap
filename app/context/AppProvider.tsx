@@ -19,6 +19,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isLoading,setIsLoading] = useState(false)
 
 
+  useEffect(()=>{
+    if(!showUpgradeStack) setShowUpgradeModal(false)
+  },[showUpgradeStack])
+
   return (
     <AppContext.Provider value={{ showUpgradeModal, setShowUpgradeModal,isAuthenticated,setIsAuthenticated,showUpgradeStack,setShowUpgradeStack,isLoading }}>
       {children}

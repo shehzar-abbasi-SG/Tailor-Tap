@@ -40,7 +40,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (credentials: LoginCredentials): Promise<void> => {
     try {
       setisLoading(true)
+
       const response = await api.post<BaseResponse<LoginResponse>>('/auth/login', credentials);
+      console.log('response :>> ',response);
+
       const { success, data,message,errors } = response.data;
       if(!success) {
         if(message) showToast({type:"error",message:message}) 
@@ -55,6 +58,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsAuthenticated(true)
      showToast({type:"success", message: 'Login successful'});
     } catch (error) {
+      console.log('error :>> ',error);
+
       if (error instanceof AxiosError) {
         const { message } = error.response?.data;
         showToast({ type: 'error', message: message ?? 'An error occurred' });

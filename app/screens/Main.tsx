@@ -6,6 +6,7 @@ import { View ,StyleSheet} from 'react-native';
 import NavigationContainer from "@/app/components/navigation/Navigation"
 import { useAppContext } from '../context/AppProvider';
 import { getAuthData } from '../utils/auth';
+import Logo from "@/assets/images/logo.svg"
 
 function Main() {
     const [isFontsLoadingLazy, setIsFontLoadingLazy] = useState(true);
@@ -49,7 +50,7 @@ function Main() {
    
   
     if (!fontsLoaded) {
-      return <GluestackUIProvider mode="light"><View style={styles.container}/></GluestackUIProvider>;
+      return <GluestackUIProvider mode="light"><View style={styles.container}><Logo/></View></GluestackUIProvider>;
     }
     else if (isFontsLoadingLazy && isLoading) {
       return <GluestackUIProvider mode="light"><SplashScreen /></GluestackUIProvider>;
@@ -62,7 +63,9 @@ function Main() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#38D55B',
+      alignItems:'center',
+      justifyContent:"center"
     },
   });
 

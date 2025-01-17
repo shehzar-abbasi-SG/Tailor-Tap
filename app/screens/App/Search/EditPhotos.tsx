@@ -15,6 +15,7 @@ import { useCustomer } from "@/app/context/CustomerContext";
 import { useClientDetailFormContext } from "@/app/context/FormContext";
 import ModalWrapper from "@/app/components/modals/Modal";
 import { Box } from "@/app/components/ui/box";
+import { useRoute } from "@react-navigation/native";
 
 type SearchScreenNavigationProp = StackNavigationProp<SearchStackParamList>;
 export type TFile= {
@@ -32,7 +33,9 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
   const [selectedImageIdToRemove,setSelectedImageIdToRemove] = useState<number>()
   const [showConfirmationModal,setShowConfirmationModal] = useState(false)
   const [uploadedFiles,setUploadedFiles] = useState<any>()
-  
+  const [showConfirmationModalDeleteClient,setShowConfirmationModalDeleteClient] = useState(false)
+  const route = useRoute()
+  const {isEditMode}:any = route.params
   const validationSchema = Yup.object({
       images: Yup.array().of(
           Yup.string().required('Image is required')
@@ -57,6 +60,9 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
     setShowConfirmationModal(false);
     setSelectedImageIdToRemove(undefined);
   };
+  const closeDeleteClientModal=()=>{
+    setShowConfirmationModalDeleteClient(false)
+  }
  
   const handleRemoveImage = async (index:number) => {
     const imageToRemove = values.images[index];
@@ -78,6 +84,7 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
       closeModal()
   };
   const pickImage = async () => {
+      if(!isEditMode) return
       const response = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       quality: 1,
@@ -100,7 +107,7 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
       setUpdateClientFormData((prev)=>({...prev,images:uris}))
   };
 
-
+console.log("edit mode",isEditMode)
   return (
     <Layout scrollable={false}>
         <Header onBackPress={()=>navigation.goBack()}/>
@@ -111,7 +118,7 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
                   <Text>{selectedCustomer?.fullName}</Text>
                   <Text>{selectedCustomer?.phoneNumber}</Text>
                 </View>
-                <Button onPress={()=>{if(selectedCustomer) deleteCustomer(selectedCustomer._id)}} isLoading={isCustomerLoading} isDisabled={isCustomerLoading} title="Delete" className="mt-0 h-[39px] rounded-[6px] bg-red-500 disabled:bg-red-300" 
+                <Button onPress={()=>setShowConfirmationModalDeleteClient(true)} isLoading={isCustomerLoading} isDisabled={isCustomerLoading||!isEditMode} title="Delete" className="mt-0 h-[39px] rounded-[6px] bg-red-500 disabled:bg-red-300" 
                 buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"  />
             </View>
             <View className="w-full border-[1px] border-[#DCDCDC]" />
@@ -156,7 +163,7 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
                         ))
                     }
                     </View>
-                    <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} className="h-[66px] rounded-[3px] mt-10 w-full" buttonTextStyles="text-[22px] uppercase" onPress={()=>handleSubmit()} title="Save Changes"/>
+                    <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading||!isEditMode} className="h-[66px] rounded-[3px] mt-10 w-full" buttonTextStyles="text-[22px] uppercase" onPress={()=>handleSubmit()} title="Save Changes"/>
             </ScrollView>
           </View> 
         </View>
@@ -170,6 +177,22 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
                       className="mt-0 h-[45px] rounded-[4px] bg-gray-400 disabled:bg-gray-400" 
                       buttonTextStyles="text-[16px] leading-[24px] uppercase p-0" />
                   <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} onPress={()=>{if(selectedImageIdToRemove!=undefined)handleRemoveImage(selectedImageIdToRemove)}} title="Delete" 
+                      className="mt-0 h-[45px] rounded-[4px] bg-red-500 disabled:bg-red-300" 
+                      buttonTextStyles="text-[16px] leading-[24px] uppercase p-0" />
+              </View>
+            
+            </Box>
+        </ModalWrapper>
+        <ModalWrapper showModal={showConfirmationModalDeleteClient} onClose={closeDeleteClientModal}>
+          <Box className='flex gap-[23px] items-center justify-center'>
+              <Text className='mt-[5px] font-medium text-[14px] leading-[21px] text-center font-[PoppinsMedium]'>
+                  Are you sure you want to delete this client? This action cannot be undone.
+              </Text>
+              <View className='w-full flex flex-row items-center justify-center gap-x-[10px]'>
+                  <Button isDisabled={isCustomerLoading} onPress={closeDeleteClientModal} title="Cancel" 
+                      className="mt-0 h-[45px] rounded-[4px] bg-gray-400 disabled:bg-gray-400" 
+                      buttonTextStyles="text-[16px] leading-[24px] uppercase p-0" />
+                  <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} onPress={()=>{if(selectedCustomer) deleteCustomer(selectedCustomer._id)}} title="Delete" 
                       className="mt-0 h-[45px] rounded-[4px] bg-red-500 disabled:bg-red-300" 
                       buttonTextStyles="text-[16px] leading-[24px] uppercase p-0" />
               </View>

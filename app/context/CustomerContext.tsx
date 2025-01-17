@@ -10,7 +10,7 @@ import { HomeScreenNavigationProp, SearchScreenNavigationProp } from '../types/n
 
 interface CustomerContextProps {
   getCustomers: () => Promise<void>;
-  getCustomerById: (customerId: string) => Promise<void>;
+  getCustomerById: (customerId: string,isEditMode:boolean) => Promise<void>;
   createCustomer: (customerData: ClientDetailFormData) => Promise<void>;
   updateCustomer: (customerId: string, updates: Partial<ClientUpdateFormData>,files?:File[]|null) => Promise<void>;
   deleteCustomer: (customerId: string) => Promise<void>;
@@ -35,6 +35,7 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [isCustomerLoading, setIsCustomerLoading] = useState(false);
   const [isCustomerDetailLoading,setIsCustomerDetailLoading] = useState(false)
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const mainNavigation = useNavigation<any>();
   const searchNavigation = useNavigation<SearchScreenNavigationProp>();
 
 
@@ -55,7 +56,7 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
-  const getCustomerById = async (customerId: string): Promise<void> => {
+  const getCustomerById = async (customerId: string,isEditMode:boolean): Promise<void> => {
     try {
       setIsCustomerDetailLoading(true);
       const response = await api.get<BaseResponse<CustomerDetails>>(`/customer/${customerId}`);
@@ -65,7 +66,7 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         return;
       }
       setSelectedCustomer(data);
-      searchNavigation.navigate('EditDetail')
+      mainNavigation.navigate('Search',{screen:'EditDetail',params:{isEditMode}})
     } catch (error) {
       handleError(error, 'Failed to fetch customer details');
     } finally {

@@ -30,12 +30,13 @@ const LoginScreen = ({navigation}:ILoginScreenProps) => {
         />
         <Heading title="Login" className="w-[111px] mt-[60px]" titleStyles="text-[36px] leading-[54px] font-bold font-[PoppinsBold]" underlineStyles="mt-[-5px]"/>
         <Formik
-        initialValues={{ email: '', password: '' } as LoginCredentials}
+        initialValues={{ email: 'shehzer@stay.gold', password: 'demo1234' } as LoginCredentials}
         validationSchema={Yup.object({
           email: Yup.string().email('Invalid email').required('Email is required.'),
           password: Yup.string().required('Password is required.'),
         })}
         onSubmit={(values) => {
+          console.log('values :>> ', values);
           login(values)
         }}>
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Layout from "@/app/components/common/Layout";
 import Header from "@/app/components/common/Header";
 import Button from "@/app/components/common/Button";
@@ -74,17 +74,17 @@ const SearchScreen = ({navigation}:ISearchNavigationProps) => {
             :
             <>
               {filteredCustomers && filteredCustomers.map((customer,index)=>(
-                <View key={index} className={`flex flex-row justify-between items-center w-full ${index===filteredCustomers.length-1? "":"border-b"}  border-[#DCDCDC] py-[18px]`}>
+                <TouchableOpacity onPress={()=>getCustomerById(customer._id,false)} key={index} className={`flex flex-row justify-between items-center w-full ${index===filteredCustomers.length-1? "":"border-b"}  border-[#DCDCDC] py-[18px]`}>
                   <View className="flex flex-col gap-y-1">
                     <Text>{customer.fullName}</Text>
                     <Text>{customer.phoneNumber}</Text>
                   </View>
                   <Button onPress={()=>{
-                    getCustomerById(customer._id)
+                    getCustomerById(customer._id,true)
                   }} 
                   title="Edit" className="mt-0 h-[39px] rounded-[6px]" 
                   buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"  />
-                </View>
+                </TouchableOpacity>
               ))}
             </>
             }

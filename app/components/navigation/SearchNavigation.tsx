@@ -23,7 +23,9 @@ function SearchNavigation({}:ISearchNavigationProps) {
          <ClientDetailFormProvider>
             <SearchStack.Navigator 
                 screenOptions={{
-                    headerShown:false
+                    headerShown:false,
+                    animation:'slide_from_right',
+                    gestureEnabled:true
                 }}
             >
                 <SearchStack.Screen name="SearchMain" component={SearchScreen} />

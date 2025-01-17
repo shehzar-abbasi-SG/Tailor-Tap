@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet,Text, TouchableHighlight } from "react-native";
+import { View, StyleSheet,Text, TouchableHighlight, TouchableOpacity } from "react-native";
 import ChooseLanguage from "@/app/screens/App/Home/ChooseLanguage";
 import Layout from "@/app/components/common/Layout";
 import { Box } from "@/app/components/ui/box";
 import AntDesignIcon from '@expo/vector-icons/AntDesign';
 import { ScrollView } from "react-native-gesture-handler";
 import { Image } from "@/app/components/ui/image";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { HomeScreenNavigationProp, HomeStackParamList } from "@/app/types/navigation";
+import { HomeScreenNavigationProp } from "@/app/types/navigation";
 import Header from "@/app/components/common/Header";
-import UpgradeModal from "@/app/components/modals/UpgradeModal";
 import { useAppContext } from "@/app/context/AppProvider";
 import { useUser } from "@/app/context/UserContext";
 import { getAuthData } from "@/app/utils/auth";
 import { useCustomer } from "@/app/context/CustomerContext";
 import { Spinner } from "@/app/components/ui/spinner";
-
-
+import Button from "@/app/components/common/Button";
 
 interface IHomeNavigationProps {
     navigation: HomeScreenNavigationProp;
@@ -26,9 +23,10 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
     const closeLanguageSelectionView =()=>{
         setShowLanguageSelectionView(false)
     }
-    const {showUpgradeModal,setShowUpgradeModal,setShowUpgradeStack,isAuthenticated} = useAppContext()
+    const {isAuthenticated} = useAppContext()
     const {getUserDetails} = useUser()
-    const {customers,getCustomers,isCustomerLoading} = useCustomer()
+    const {customers,getCustomers,isCustomerLoading,getCustomerById} = useCustomer()
+    // const { t } = useTranslation();
     useEffect(() => {
       if(!isAuthenticated) return
       const fetchUserDetails = async () => {
@@ -39,7 +37,6 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
         } catch (error) {
         }
       };
-      console.log('calling :>> ');
       fetchUserDetails();
       getCustomers()
 
@@ -50,7 +47,7 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
         <ChooseLanguage languageSelectionView={showLanguageSelectionView} closeLanguageSelectionView={closeLanguageSelectionView}/>
       :
       <>
-        <Header onBackPress={()=>{}} onVideoPress={()=>setShowUpgradeModal(true)}/>
+        <Header onBackPress={()=>{}}/>
         <View style={styles.container}>
           <TouchableHighlight onPress={()=>navigation.navigate('ClientForm')} underlayColor={"#38D55B"} className="w-full">
             <Box className="bg-[#38D55B] h-[138px] w-full max-w-[400px] rounded-[7px] flex items-center gap-y-[22px] p-5">
@@ -64,6 +61,8 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
               <Text className="font-[InterMedium] font-medium leading-[22px] text-lg">Watch previous data</Text>
           </Box>
           <View className="w-full">
+            {/* <TouchableOpacity onPress={()=> i18n.changeLanguage('es')}>Press me</TouchableOpacity> */}
+            {/* <Text className="text-black font-semibold text-lg font-[PoppinsSemiBold] flex-shrink-0">{t('welcome')}</Text> */}
             <Text className="font-[InterBold] text-[21px] font-bold leading-[25px] mt-[26px] w-full">My Clients</Text>
             {isCustomerLoading? 
               <View className="mt-[100px]">
@@ -76,12 +75,17 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
               >
                   {customers && customers.length>0 ?
                     customers.map((customer,index)=>(
-                      <View key={customer._id} className={`flex flex-row justify-between items-center w-full ${index===customers.length-1 ? "" :"border-b"}  border-[#DCDCDC] py-[18px]`}>
+                      <TouchableOpacity onPress={()=>getCustomerById(customer._id,false)} key={customer._id} className={`flex flex-row justify-between items-center w-full ${index===customers.length-1 ? "" :"border-b"}  border-[#DCDCDC] py-[18px]`}>
                         <View className="flex flex-col gap-y-1">
                           <Text>{customer.fullName}</Text>
                           <Text>{customer.phoneNumber}</Text>
                         </View>
-                      </View>
+                        <Button onPress={()=>{
+                          getCustomerById(customer._id,true)
+                        }} 
+                        title="Edit" className="mt-0 h-[39px] rounded-[6px]" 
+                        buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"  />
+                      </TouchableOpacity>
                     ))
                   : 
                     <>
@@ -99,8 +103,7 @@ const HomeScreen = ({navigation}:IHomeNavigationProps) => {
             }
           </View>
         </View>
-        {/* Plan upgrade modal */}
-        <UpgradeModal showModal={showUpgradeModal} setShowModal={setShowUpgradeModal} onClickUpgrade={()=>setShowUpgradeStack(true)}/>
+        
 
       </>
       }

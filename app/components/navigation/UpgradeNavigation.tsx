@@ -18,7 +18,9 @@ function UpgradeNavigation({}:IUpgradeNavigationProps) {
          <UpgradePlanFormProvider>
             <UpgradeStack.Navigator 
                 screenOptions={{
-                    headerShown:false
+                    headerShown:false,
+                    animation:'slide_from_right',
+                    gestureEnabled:true
                 }}
             >
                 <UpgradeStack.Screen name="Plan" component={ChoosePlan} />

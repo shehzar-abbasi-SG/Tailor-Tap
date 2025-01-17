@@ -20,13 +20,13 @@ const ProfileScreen = ({navigation}:IProfileNavigationProps) => {
   const {userDetails} = useUser()
   return (
     <Layout scrollable={false}>
-      <View className='relative' style={styles.container}>
-        <View className='w-full z-10 absolute top-5'>
-          <Header onBackPress={()=>{}} className="px-0"/>
-        </View>
-        <View className='flex items-center justify-center gap-y-4 absolute inset-0 bg-[#38D55B] rounded-b-[82px] h-[260px]'>
+      <View style={styles.container}>
+        <View className="bg-[#38D55B] px-10 rounded-b-[82px] h-[260px]">
+          <View className='w-full z-10 top-5'>
+            <Header onBackPress={()=>{}} className="px-0"/>
+          </View>
           <View className="relative h-full w-full">
-            <View className="absolute bottom-[-120px] left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <View className="absolute bottom-[-100px] left-1/2 -translate-x-1/2 flex items-center justify-center gap-x-10">
               <View className="flex items-center justify-center w-[78px] h-[78px] bg-[#D9D9D9] rounded-full border-[6px] border-white">
                   <Image
                     source={require('@/assets/images/user_icon.png')}
@@ -46,18 +46,17 @@ const ProfileScreen = ({navigation}:IProfileNavigationProps) => {
                     Edit Profile
                   </ButtonText>
               </Button>
+              <Button className="border-[2px] border-[#38D55B] bg-transparent rounded-full h-[23px] w-[75px] p-0 mt-[17px]">
+                <ButtonText 
+                onPress={logout}
+                className="font-[PoppinsBold] font-bold text-[9px] leading-[13.5px] uppercase text-black">
+                  Logout
+                </ButtonText>
+              </Button>
             </View>
           </View>
         </View>
-        <View className="w-full flex items-center justify-center">
-          <Button className="border-[2px] border-[#38D55B] bg-transparent rounded-full h-[23px] w-[75px] p-0 self-center">
-            <ButtonText 
-            onPress={logout}
-            className="font-[PoppinsBold] font-bold text-[9px] leading-[13.5px] uppercase text-black">
-              Logout
-            </ButtonText>
-          </Button>
-        </View>
+       
       </View>
     </Layout>
   )
@@ -65,10 +64,6 @@ const ProfileScreen = ({navigation}:IProfileNavigationProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding:40,
     overflow:'visible',
     backgroundColor: "#fff",
   },

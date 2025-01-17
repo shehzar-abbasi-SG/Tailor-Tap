@@ -4,7 +4,10 @@ import FontAwesomeIcons from '@expo/vector-icons/FontAwesome';
 import AntDesignIcon from "@expo/vector-icons/AntDesign"
 import { Image } from '../ui/image';
 import { twMerge } from 'tailwind-merge';
-
+import YoutubePlayer from "react-native-youtube-iframe";
+import { useState } from 'react';
+import ModalWrapper from '../modals/Modal';
+import VideoModal from '../modals/VideoModal';
 interface IHeader{
     onBackPress:()=>void;
     onVideoPress?:()=>void;
@@ -12,6 +15,11 @@ interface IHeader{
     className?:string
 }
 const Header = ({ onBackPress, onVideoPress=()=>{},displayMode,className='' }:IHeader) => {
+  
+  const [showVideoModal, setShowVideoModal] = useState(false);
+
+  const openVideoModal = () => setShowVideoModal(true);
+  const closeVideoModal = () => setShowVideoModal(false);
   return (
     <View className={twMerge('flex flex-row justify-between px-10 items-center',className)}>
       {displayMode==="Measurements"?
@@ -34,7 +42,7 @@ const Header = ({ onBackPress, onVideoPress=()=>{},displayMode,className='' }:IH
               <FontAwesomeIcons name="chevron-left" size={22} color="#000" />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={onVideoPress}>
+          <TouchableOpacity onPress={openVideoModal}>
               <Image
                   source={require('@/assets/images/video_icon.png')}
                   alt="Video Icon"
@@ -42,6 +50,7 @@ const Header = ({ onBackPress, onVideoPress=()=>{},displayMode,className='' }:IH
                   resizeMode="contain" 
                 />
           </TouchableOpacity>
+          <VideoModal showModal={showVideoModal} onClose={closeVideoModal} videoId="gvkqT_Uoahw"/> 
       </>
       }
     </View>

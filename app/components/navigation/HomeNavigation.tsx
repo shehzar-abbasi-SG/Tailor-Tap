@@ -23,7 +23,9 @@ function HomeNavigation({navigation}:IHomeNavigationProps) {
                 name="HomeMain" 
                 component={HomeScreen}
                 options={{
-                    headerShown:false
+                    headerShown:false,
+                    animation:'slide_from_right',
+                    gestureEnabled:true
                 }}
             />
             <HomeStack.Screen 
