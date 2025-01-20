@@ -27,6 +27,9 @@ function MainNavigator() {
             tabBarShowLabel:false,
             tabBarHideOnKeyboard: true,
             animation:'shift',
+            headerStyle:{
+
+            },
             tabBarIcon: ({ focused, color, size }) => {
               let IconElement;
               if (route.name === "HomeTab") {
