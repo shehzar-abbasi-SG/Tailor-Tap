@@ -13,6 +13,7 @@ import { useCustomer } from "@/app/context/CustomerContext";
 import { Spinner } from "@/app/components/ui/spinner";
 import { ClientDetailFormData, ClientUpdateFormData, useClientDetailFormContext } from "@/app/context/FormContext";
 import { useRoute } from '@react-navigation/native';
+import { rtlLanguages, useAppContext } from "@/app/context/AppProvider";
 
 
 type SearchScreenNavigationProp = StackNavigationProp<SearchStackParamList>;
@@ -24,6 +25,7 @@ interface ISearchNavigationProps {
 const EditDetail = ({navigation}:ISearchNavigationProps) => {
     const route = useRoute();
     const params:any = route.params
+    const {i18n} = useAppContext()
 
     console.log('params.isEditMode ===> ', params.isEditMode);
 
@@ -83,11 +85,23 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                     <Text>{selectedCustomer?.phoneNumber}</Text>
                     </View>
                     {params?.isEditMode && 
-                        <Button title="Edit" className="mt-0 h-[39px] rounded-[6px]" 
-                        buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"  />
+                        <Button 
+                            buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]" 
+                            title={i18n.t('edit')} 
+                            className="mt-0 h-fit py-1 rounded-[6px]" 
+                            buttonTextStylesObject={{
+                                lineHeight: rtlLanguages.includes(i18n.locale) ? 37.5 : 25,
+                                writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                            }}
+                        />
                     }
                 </View>
-                <Text className="text-[#36BC54] text-left self-start font-[PoppinsRegular] font-normal text-[17px] leading-[25.5px] mb-3 mt-[20px]">Detail</Text>
+                <Text style={{
+                    lineHeight: rtlLanguages.includes(i18n.locale) ? 42 : 25.5,
+                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr',
+                    alignSelf: rtlLanguages.includes(i18n.locale) ? 'flex-end' : 'flex-start',
+
+                }} className="text-[#36BC54] self-start font-[PoppinsRegular] font-normal text-[17px] leading-[25.5px] mb-3 mt-[20px]">{i18n.t('detail')}</Text>
                 <View className="w-full border-[1px] border-[#DCDCDC]" />
                 {isCustomerLoading?
                     <View className="mt-[100px]">
@@ -98,8 +112,13 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                 contentContainerStyle={{ flexGrow: 1,paddingTop:28,paddingBottom:100 }}
                 showsVerticalScrollIndicator={false}
                 >
-                    <View className="flex flex-row justify-between items-center w-full">
-                        <Text className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">Length</Text>
+                    <View className={`flex ${rtlLanguages.includes(i18n.locale)?"flex-row-reverse":"flex-row"} justify-between items-center w-full`}>
+                        <Text 
+                        style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 34.5,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }}
+                        className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">{i18n.t('length')}</Text>
                         <Input
                             variant="outline"
                             size="md"
@@ -114,8 +133,12 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                             />
                         </Input>
                     </View>
-                    <View className="flex flex-row justify-between items-center w-full mt-7">
-                        <Text className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">Shoulder</Text>
+                    <View className={`flex ${rtlLanguages.includes(i18n.locale)?"flex-row-reverse":"flex-row"} justify-between items-center w-full  mt-7`}>
+
+                        <Text  style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 34.5,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }} className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">{i18n.t('shoulder')}</Text>
                         <Input
                             variant="outline"
                             size="md"
@@ -130,8 +153,12 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                             />
                         </Input>
                     </View>
-                    <View className="flex flex-row justify-between items-center w-full mt-7">
-                        <Text className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">Arms</Text>
+                    <View className={`flex ${rtlLanguages.includes(i18n.locale)?"flex-row-reverse":"flex-row"} justify-between items-center w-full  mt-7`}>
+
+                        <Text  style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 34.5,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }} className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">{i18n.t('arms')}</Text>
                         <Input
                             variant="outline"
                             size="md"
@@ -146,8 +173,11 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                             />
                         </Input>
                     </View>
-                    <View className="flex flex-row justify-between items-center w-full mt-7">
-                        <Text className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">Cuffs</Text>
+                    <View className={`flex ${rtlLanguages.includes(i18n.locale)?"flex-row-reverse":"flex-row"} justify-between items-center w-full  mt-7`}>
+                        <Text  style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 34.5,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }} className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">{i18n.t('cuffs')}</Text>
                         <Input
                             variant="outline"
                             size="md"
@@ -162,8 +192,12 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                             />
                         </Input>
                     </View>
-                    <View className="flex flex-row justify-between items-center w-full mt-7">
-                        <Text className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">Collar</Text>
+                                       <View className={`flex ${rtlLanguages.includes(i18n.locale)?"flex-row-reverse":"flex-row"} justify-between items-center w-full  mt-7`}>
+
+                        <Text  style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 34.5,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }} className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">{i18n.t('collar')}</Text>
                         <Input
                             variant="outline"
                             size="md"
@@ -178,8 +212,12 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                             />
                         </Input>
                     </View>
-                    <View className="flex flex-row justify-between items-center w-full mt-7">
-                        <Text className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">Chest</Text>
+                                       <View className={`flex ${rtlLanguages.includes(i18n.locale)?"flex-row-reverse":"flex-row"} justify-between items-center w-full  mt-7`}>
+
+                        <Text  style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 34.5,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }} className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">{i18n.t('chest')}</Text>
                         <Input
                             variant="outline"
                             size="md"
@@ -194,8 +232,12 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                             />
                         </Input>
                     </View>
-                    <View className="flex flex-row justify-between items-center w-full mt-7">
-                        <Text className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">Fitting</Text>
+                                       <View className={`flex ${rtlLanguages.includes(i18n.locale)?"flex-row-reverse":"flex-row"} justify-between items-center w-full  mt-7`}>
+
+                        <Text  style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 34.5,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }} className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">{i18n.t('fitting')}</Text>
                         <Input
                             variant="outline"
                             size="md"
@@ -210,8 +252,12 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                             />
                         </Input>
                     </View>
-                    <View className="flex flex-row justify-between items-center w-full mt-7">
-                        <Text className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">Pant</Text>
+                <View className={`flex ${rtlLanguages.includes(i18n.locale)?"flex-row-reverse":"flex-row"} justify-between items-center w-full  mt-7`}>
+
+                        <Text  style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 34.5,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }} className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">{i18n.t('pant')}</Text>
                         <Input
                             variant="outline"
                             size="md"
@@ -226,8 +272,12 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                             />
                         </Input>
                     </View>
-                    <View className="flex flex-row justify-between items-center w-full mt-7">
-                        <Text className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">Lap</Text>
+                                       <View className={`flex ${rtlLanguages.includes(i18n.locale)?"flex-row-reverse":"flex-row"} justify-between items-center w-full  mt-7`}>
+
+                        <Text style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 34.5,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }}  className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">{i18n.t('lap')}</Text>
                         <Input
                             variant="outline"
                             size="md"
@@ -242,8 +292,12 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                             />
                         </Input>
                     </View>
-                    <View className="flex flex-row justify-between items-center w-full mt-7">
-                        <Text className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">Paincha</Text>
+                                       <View className={`flex ${rtlLanguages.includes(i18n.locale)?"flex-row-reverse":"flex-row"} justify-between items-center w-full  mt-7`}>
+
+                        <Text  style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 34.5,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }} className="text-[23px] font-normal font-[PoppinsRegular] leading-[34.5px] text-[#585858]">{i18n.t('paincha')}</Text>
                         <Input
                             variant="outline"
                             size="md"
@@ -258,7 +312,12 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
                             />
                         </Input>
                     </View>
-                    <Button className="h-[66px] rounded-[3px] mt-10" buttonTextStyles="text-[22px] uppercase" onPress={()=>handleSubmit()} title="Next"/>
+                    <Button 
+                    buttonTextStylesObject={{
+                        lineHeight: rtlLanguages.includes(i18n.locale) ? 40 : 30,
+                        writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                    }}
+                    className="h-[66px] rounded-[3px] mt-10" buttonTextStyles="text-[22px] uppercase" onPress={()=>handleSubmit()} title={i18n.t('next')}/>
                 </ScrollView>
                 }
         </View>

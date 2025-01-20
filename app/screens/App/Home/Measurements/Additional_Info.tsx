@@ -11,6 +11,7 @@ import Layout from "@/app/components/common/Layout";
 import { PartialClientDetailFormData, useClientDetailFormContext } from '@/app/context/FormContext';
 import { Textarea, TextareaInput } from '@/app/components/ui/textarea';
 import { useCustomer } from '@/app/context/CustomerContext';
+import { rtlLanguages, useAppContext } from '@/app/context/AppProvider';
 
 
 
@@ -24,13 +25,27 @@ const MeasurementScreenAdditionalInfo =({navigation}:IMeasurementNavigationProps
     
     const {setFormData,formData} = useClientDetailFormContext()
     const {createCustomer,isCustomerLoading} = useCustomer()
+    const {i18n} = useAppContext()
     
   return (
     <Layout>
       <Header displayMode="Measurements" onBackPress={()=>navigation.goBack()} onVideoPress={()=>{}}/>
       <View style={styles.container}>
-      <Heading title='Measurements' className='w-[180px]' titleStyles='font-[InterBold] text-[21px] leading-[25px]' underlineStyles='mt-1'/>
-      <Button className="self-center rounded-[3px] w-[230px] h-[55px]" buttonTextStyles="text-[21px] leading-[25px] font-bold font-[InterBold] normal-case p-0" onPress={()=>{}} title="Additional Detail"/>
+      <Heading 
+        titleTextStylesObject={{
+          lineHeight: rtlLanguages.includes(i18n.locale) ? 40 : 25,
+          writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+        }}
+        title={i18n.t('measurements')} 
+        className={`${rtlLanguages.includes(i18n.locale) ? 'ml-auto w-[50px]':'w-[180px]'}`} 
+        titleStyles='font-[InterBold] text-[21px] leading-[25px]' 
+        underlineStyles='mt-1'/>
+       <Button 
+        buttonTextStylesObject={{
+          lineHeight: rtlLanguages.includes(i18n.locale) ? 35 : 30,
+          writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+        }}
+        className="self-center rounded-[3px] w-[140px] h-[34px]" buttonTextStyles="text-[13px] leading-[15px] font-bold font-[InterBold] uppercase p-0" onPress={()=>{}} title={i18n.t('additional_detail')}/>
         <Formik
           initialValues={{ additionalInformation: '' } as PartialClientDetailFormData}
           validationSchema={Yup.object({
@@ -55,8 +70,8 @@ const MeasurementScreenAdditionalInfo =({navigation}:IMeasurementNavigationProps
                       value={values.additionalInformation}
                       onChangeText={handleChange('additionalInformation')}
                       onBlur={handleBlur('additionalInformation')}
-                      placeholder="Enter Additional Detail"
-                      className="pl-[30px] pt-[30px] text-base placeholder:text-[#818181] placeholder:text-[20px] placeholder:font-normal placeholder:font-[PoppinsRegular] placeholder:leading-[30px]"
+                      placeholder={i18n.t('enter_additional_detail')}
+                      className={`pl-[30px] pt-[30px] text-base placeholder:text-[#818181] placeholder:text-[20px] placeholder:font-normal placeholder:font-[PoppinsRegular] placeholder:leading-[30px] ${rtlLanguages.includes(i18n.locale)?"placeholder:text-right":"placeholder:text-left"}`}
 
                     />
                 </Textarea>
@@ -65,8 +80,26 @@ const MeasurementScreenAdditionalInfo =({navigation}:IMeasurementNavigationProps
                   )}
               </View>
               <View className='flex gap-y-[16px]'>
-                <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} className="mt-0 h-[50px] rounded-[7px]" buttonTextStyles="text-[22px] leading-[33px] uppercase p-0" onPress={()=>handleSubmit()} title="Done"/>
-                <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} className="mt-0 bg-transparent h-[50px] rounded-[7px] border-[#38D55B] border-[2px] disabled:bg-transparent " buttonTextStyles="text-[22px] leading-[33px] uppercase text-[#38D55B] p-0" onPress={()=>{createCustomer({...formData})}} title="Skip"/>
+                <Button 
+                buttonTextStylesObject={{
+                  lineHeight: rtlLanguages.includes(i18n.locale) ? 57 : 30,
+                  writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                }}
+                isLoading={isCustomerLoading} 
+                isDisabled={isCustomerLoading} 
+                className="mt-0 h-[57px] rounded-[7px]" 
+                buttonTextStyles="text-[22px] leading-[33px] uppercase p-0" 
+                onPress={()=>handleSubmit()} title={i18n.t('done')}/>
+                <Button 
+                 buttonTextStylesObject={{
+                  lineHeight: rtlLanguages.includes(i18n.locale) ? 57 : 30,
+                  writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                }}
+                isLoading={isCustomerLoading} 
+                isDisabled={isCustomerLoading} 
+                className="mt-0 bg-transparent h-[57px] rounded-[7px] border-[#38D55B] border-[2px] disabled:bg-transparent " buttonTextStyles="text-[22px] leading-[33px] uppercase text-[#38D55B] p-0" 
+                onPress={()=>{createCustomer({...formData})}} title={i18n.t('skip')}/>
+              
               </View>
             </>
           )}

@@ -18,36 +18,29 @@ interface IHomeNavigationProps {
 function HomeNavigation({navigation}:IHomeNavigationProps) {
   return (
     <ClientDetailFormProvider>
-        <HomeStack.Navigator>
+        <HomeStack.Navigator
+        screenOptions={{
+            headerShown:false,
+            animation:'slide_from_right',
+            gestureEnabled:true
+        }}
+        >
             <HomeStack.Screen 
                 name="HomeMain" 
                 component={HomeScreen}
-                options={{
-                    headerShown:false,
-                    animation:'slide_from_right',
-                    gestureEnabled:true
-                }}
+
             />
             <HomeStack.Screen 
                 name="ClientForm" 
                 component={ClientFormScreen}
-                options={{
-                    headerShown:false
-                }}
             />
             <HomeStack.Screen 
                 name="Measurements" 
                 component={MeasurementNavigation}
-                options={{
-                    headerShown:false
-                }}
             />
             <HomeStack.Screen 
                 name="Congratulations" 
                 component={CongratulationScreen}
-                options={{
-                    headerShown:false
-                }}
             />
 
         </HomeStack.Navigator>

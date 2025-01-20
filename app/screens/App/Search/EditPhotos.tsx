@@ -16,6 +16,7 @@ import { useClientDetailFormContext } from "@/app/context/FormContext";
 import ModalWrapper from "@/app/components/modals/Modal";
 import { Box } from "@/app/components/ui/box";
 import { useRoute } from "@react-navigation/native";
+import { rtlLanguages, useAppContext } from "@/app/context/AppProvider";
 
 type SearchScreenNavigationProp = StackNavigationProp<SearchStackParamList>;
 export type TFile= {
@@ -35,6 +36,7 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
   const [uploadedFiles,setUploadedFiles] = useState<any>()
   const [showConfirmationModalDeleteClient,setShowConfirmationModalDeleteClient] = useState(false)
   const route = useRoute()
+  const {i18n} = useAppContext()
   const {isEditMode}:any = route.params
   const validationSchema = Yup.object({
       images: Yup.array().of(
@@ -107,7 +109,6 @@ const EditPhotos = ({navigation}:ISearchNavigationProps) => {
       setUpdateClientFormData((prev)=>({...prev,images:uris}))
   };
 
-console.log("edit mode",isEditMode)
   return (
     <Layout scrollable={false}>
         <Header onBackPress={()=>navigation.goBack()}/>
@@ -118,8 +119,13 @@ console.log("edit mode",isEditMode)
                   <Text>{selectedCustomer?.fullName}</Text>
                   <Text>{selectedCustomer?.phoneNumber}</Text>
                 </View>
-                <Button onPress={()=>setShowConfirmationModalDeleteClient(true)} isLoading={isCustomerLoading} isDisabled={isCustomerLoading||!isEditMode} title="Delete" className="mt-0 h-[39px] rounded-[6px] bg-red-500 disabled:bg-red-300" 
-                buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"  />
+                <Button onPress={()=>setShowConfirmationModalDeleteClient(true)} isLoading={isCustomerLoading} isDisabled={isCustomerLoading||!isEditMode} title={i18n.t('delete')} className="mt-0 h-[39px] rounded-[6px] bg-red-500 disabled:bg-red-300" 
+                buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]" 
+                buttonTextStylesObject={{
+                lineHeight: rtlLanguages.includes(i18n.locale) ? 38 : 25.5,
+                writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+              }}
+                />
             </View>
             <View className="w-full border-[1px] border-[#DCDCDC]" />
            <View className="w-full mt-[48px]">
@@ -137,8 +143,13 @@ console.log("edit mode",isEditMode)
                         className="w-full h-auto"
                         resizeMode="contain" 
                         />
-                        <Text className='text-center text-black leading-[21px] font-normal text-[14px] font-[PoppinsRegular]'>
-                        add photos from the device
+                        <Text 
+                        style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 45 : 21,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }}
+                        className='text-center text-black leading-[21px] font-normal text-[14px] font-[PoppinsRegular]'>
+                       {i18n.t('add_photos_from_device')}
                         </Text>
                     </View>
                     {touched.images && errors.images && (
@@ -156,27 +167,47 @@ console.log("edit mode",isEditMode)
                                 width={75}
                                 height={66}
                             /> 
+                            {isEditMode &&
                             <TouchableHighlight onPress={()=>openModal(index)} className="absolute top-[-10px] right-[0px] bg-black w-[16px] h-[16px] rounded-full flex items-center justify-center">
                                 <AntDesignIcon name="close" size={12} color={"#fff"}/>
                             </TouchableHighlight>
+                          }
                         </View>
                         ))
                     }
                     </View>
-                    <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading||!isEditMode} className="h-[66px] rounded-[3px] mt-10 w-full" buttonTextStyles="text-[22px] uppercase" onPress={()=>handleSubmit()} title="Save Changes"/>
+                    <Button 
+                    buttonTextStylesObject={{
+                      lineHeight: rtlLanguages.includes(i18n.locale) ? 45 : 30,
+                      writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                    }}
+                    isLoading={isCustomerLoading} isDisabled={isCustomerLoading||!isEditMode} className="h-[66px] rounded-[3px] mt-10" buttonTextStyles="text-[22px] uppercase" onPress={()=>handleSubmit()} title={i18n.t('save_changes')}/>
             </ScrollView>
           </View> 
         </View>
         <ModalWrapper showModal={showConfirmationModal} onClose={closeModal}>
           <Box className='flex gap-[23px] items-center justify-center'>
-              <Text className='mt-[5px] font-medium text-[14px] leading-[21px] text-center font-[PoppinsMedium]'>
-                  Are you sure you want to delete this?
+              <Text style={{
+                  lineHeight: rtlLanguages.includes(i18n.locale) ? 45 : 21,
+                  writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+              }}className='mt-[5px] font-medium text-[14px] leading-[21px] text-center font-[PoppinsMedium]'>
+                  {i18n.t('delete_confirmation')}
               </Text>
               <View className='w-full flex flex-row items-center justify-center gap-x-[10px]'>
-                  <Button isDisabled={isCustomerLoading} onPress={closeModal} title="Cancel" 
+                  <Button 
+                    buttonTextStylesObject={{
+                      lineHeight: rtlLanguages.includes(i18n.locale) ? 36 : 24,
+                      writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                    }}
+                  isDisabled={isCustomerLoading} onPress={closeModal} title={i18n.t('cancel')} 
                       className="mt-0 h-[45px] rounded-[4px] bg-gray-400 disabled:bg-gray-400" 
                       buttonTextStyles="text-[16px] leading-[24px] uppercase p-0" />
-                  <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} onPress={()=>{if(selectedImageIdToRemove!=undefined)handleRemoveImage(selectedImageIdToRemove)}} title="Delete" 
+                  <Button 
+                  buttonTextStylesObject={{
+                    lineHeight: rtlLanguages.includes(i18n.locale) ? 36 : 24,
+                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                  }}
+                  isLoading={isCustomerLoading} isDisabled={isCustomerLoading} onPress={()=>{if(selectedImageIdToRemove!=undefined)handleRemoveImage(selectedImageIdToRemove)}} title={i18n.t('delete')} 
                       className="mt-0 h-[45px] rounded-[4px] bg-red-500 disabled:bg-red-300" 
                       buttonTextStyles="text-[16px] leading-[24px] uppercase p-0" />
               </View>
@@ -185,14 +216,29 @@ console.log("edit mode",isEditMode)
         </ModalWrapper>
         <ModalWrapper showModal={showConfirmationModalDeleteClient} onClose={closeDeleteClientModal}>
           <Box className='flex gap-[23px] items-center justify-center'>
-              <Text className='mt-[5px] font-medium text-[14px] leading-[21px] text-center font-[PoppinsMedium]'>
-                  Are you sure you want to delete this client? This action cannot be undone.
+              <Text 
+              style={{
+                lineHeight: rtlLanguages.includes(i18n.locale) ? 45 : 21,
+                writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+            }}
+              className='mt-[5px] font-medium text-[14px] leading-[21px] text-center font-[PoppinsMedium]'>
+                  {i18n.t('delete_client_confirmation')}
               </Text>
               <View className='w-full flex flex-row items-center justify-center gap-x-[10px]'>
-                  <Button isDisabled={isCustomerLoading} onPress={closeDeleteClientModal} title="Cancel" 
+                  <Button 
+                   buttonTextStylesObject={{
+                    lineHeight: rtlLanguages.includes(i18n.locale) ? 36 : 24,
+                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                  }}
+                  isDisabled={isCustomerLoading} onPress={closeDeleteClientModal} title={i18n.t('cancel')} 
                       className="mt-0 h-[45px] rounded-[4px] bg-gray-400 disabled:bg-gray-400" 
                       buttonTextStyles="text-[16px] leading-[24px] uppercase p-0" />
-                  <Button isLoading={isCustomerLoading} isDisabled={isCustomerLoading} onPress={()=>{if(selectedCustomer) deleteCustomer(selectedCustomer._id)}} title="Delete" 
+                  <Button 
+                   buttonTextStylesObject={{
+                    lineHeight: rtlLanguages.includes(i18n.locale) ? 36 : 24,
+                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                  }}
+                  isLoading={isCustomerLoading} isDisabled={isCustomerLoading} onPress={()=>{if(selectedCustomer) deleteCustomer(selectedCustomer._id)}} title={i18n.t('delete')} 
                       className="mt-0 h-[45px] rounded-[4px] bg-red-500 disabled:bg-red-300" 
                       buttonTextStyles="text-[16px] leading-[24px] uppercase p-0" />
               </View>

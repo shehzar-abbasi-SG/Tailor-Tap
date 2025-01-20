@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import SplashScreen from "@/app/screens/Splash"
 import * as Font from "expo-font";
 import { GluestackUIProvider } from '../components/ui/gluestack-ui-provider';
-import { View ,StyleSheet} from 'react-native';
+import { View ,StyleSheet, I18nManager} from 'react-native';
 import NavigationContainer from "@/app/components/navigation/Navigation"
 import { useAppContext } from '../context/AppProvider';
 import { getAuthData } from '../utils/auth';
 import Logo from "@/assets/images/logo.svg"
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+
 
 function Main() {
     const [isFontsLoadingLazy, setIsFontLoadingLazy] = useState(true);
@@ -56,7 +59,7 @@ function Main() {
       return <GluestackUIProvider mode="light"><SplashScreen /></GluestackUIProvider>;
     }
   return (
-    <GluestackUIProvider mode="light"><NavigationContainer/></GluestackUIProvider>
+    <GluestackUIProvider mode="light"><SafeAreaProvider><NavigationContainer/></SafeAreaProvider></GluestackUIProvider>
   )
 }
 
@@ -69,5 +72,4 @@ const styles = StyleSheet.create({
     },
   });
 
-  
 export default Main

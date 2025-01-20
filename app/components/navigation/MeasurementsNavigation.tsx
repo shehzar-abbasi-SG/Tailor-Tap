@@ -22,82 +22,86 @@ interface IMeasurementScreenNavigationProps {
   }
 function MeasurementNavigation({navigation}:IMeasurementScreenNavigationProps) {
   return (
-        <MeasurementStack.Navigator>
+        <MeasurementStack.Navigator
+        screenOptions={{
+            headerShown:false,
+            animation:'slide_from_right',
+            gestureEnabled:true
+        }}
+        >
             <MeasurementStack.Screen 
                 name="Length" 
                 component={MeasurementScreenLength}
-                options={{
-                    headerShown:false
-                }}
+            
             />
             <MeasurementStack.Screen 
                 name="Shoulder" 
                 component={MeasurementScreenShoulder}
                 options={{
-                    headerShown:false
+                    
                 }}
             />
             <MeasurementStack.Screen 
                 name="Arms" 
                 component={MeasurementScreenArms}
                 options={{
-                    headerShown:false
+                    
                 }}
             />
             <MeasurementStack.Screen 
                 name="Cuffs" 
                 component={MeasurementScreenCuffs}
                 options={{
-                    headerShown:false
+                    
                 }}
             />
              <MeasurementStack.Screen 
                 name="Collar" 
                 component={MeasurementScreenCollar}
                 options={{
-                    headerShown:false
+                    
                 }}
             />
              <MeasurementStack.Screen 
                 name="Chest" 
                 component={MeasurementScreenChest}
                 options={{
-                    headerShown:false
+                    
                 }}
             />
              <MeasurementStack.Screen 
                 name="Fitting" 
                 component={MeasurementScreenFitting}
                 options={{
-                    headerShown:false
+                    
                 }}
             />
              <MeasurementStack.Screen 
                 name="Lap" 
                 component={MeasurementScreenLap}
                 options={{
-                    headerShown:false
+                    
                 }}
             />
              <MeasurementStack.Screen 
                 name="Pant" 
                 component={MeasurementScreenPant}
                 options={{
-                    headerShown:false
+                    
                 }}
             />
             <MeasurementStack.Screen 
                 name="Paincha" 
                 component={MeasurementScreenPaincha}
                 options={{
-                    headerShown:false
+                    
                 }}
             />
             <MeasurementStack.Screen 
                 name="AdditionalDetail" 
                 component={MeasurementScreenAdditionalInfo}
                 options={{
-                    headerShown:false
+                    
                 }}
             />
         </MeasurementStack.Navigator>

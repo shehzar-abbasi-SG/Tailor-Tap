@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import { Input, InputField } from '@/app/components/ui/input';
 import { formatPhone } from "@/app/utils/format";
 import { UserDetails } from "@/app/types/user";
+import { rtlLanguages, useAppContext } from "@/app/context/AppProvider";
 
 type ProfileScreenNavigationProp = StackNavigationProp<ProfileStackParamList>;
 
@@ -22,12 +23,13 @@ interface IProfileNavigationProps {
 
 const EditProfileScreen = ({navigation}:IProfileNavigationProps) => {
   const {userDetails,updateProfile,isUserLoading} = useUser()
+  const {i18n} = useAppContext()
   const schema = Yup.object({
-    name: Yup.string().required("Name cannot be empty"),
+    name: Yup.string().required(i18n.t('name_required')),
     email: Yup.string()
-      .email('Invalid email format').required("Email cannot be empty"),
+      .email(i18n.t('invalid_email_format')).required(i18n.t('email_required')),
     phoneNumber: Yup.string()
-      .matches(/^\(\d{3}\) \d{3}-\d{4}$/, 'Phone number is not valid').required("Phone Number cannot be empty")
+      .matches(/^((\+92)|(92)|0)?(3[0-9]{2})[0-9]{7}$/, i18n.t('phone_number_invalid')).required(i18n.t('phone_number_required'))
   });
 
   
@@ -35,7 +37,14 @@ const EditProfileScreen = ({navigation}:IProfileNavigationProps) => {
     <Layout scrollable={false}>
       <View className='relative' style={styles.container}>
         <Header onBackPress={()=>{navigation.goBack()}} className="px-0 w-full"/>
-        <Heading title='Edit Profile' className='w-[140px]' titleStyles='font-[InterBold] text-[21px] leading-[25px]' underlineStyles='mt-1'/>
+        <Heading 
+        titleTextStylesObject={{
+        lineHeight: rtlLanguages.includes(i18n.locale) ? 50 : 25,
+        writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr',
+        }}
+        title={i18n.t('edit_profile')} 
+        className={`${rtlLanguages.includes(i18n.locale) ? 'ml-auto':'w-[160px]'}`}
+        titleStyles='font-[InterBold] text-[21px] leading-[25px]' underlineStyles='mt-1'/>
         <View className='w-full mt-[0px]'>
             <Formik
                 initialValues={{ email: userDetails?.email, phoneNumber:userDetails?.phoneNumber, name:userDetails?.name } as Partial<UserDetails>}
@@ -54,7 +63,12 @@ const EditProfileScreen = ({navigation}:IProfileNavigationProps) => {
                     return(
                         <View className="flex gap-y-[30px] justify-center w-full">
                             <View>
-                                <Text className='text-[#000000] text-base font-medium font-[PoppinsRegular] ml-1 mb-1'>Full Name</Text>
+                                <Text style={{
+                                    lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 24,
+                                    textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left',
+                                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                                    }} 
+                                className='text-[#000000] text-base font-medium font-[PoppinsRegular] ml-1 mb-1'>{i18n.t('full_name')}</Text>
                                 <Input
                                     variant="outline"
                                     size="md"
@@ -71,11 +85,22 @@ const EditProfileScreen = ({navigation}:IProfileNavigationProps) => {
                                     />
                                 </Input>
                                 {touched.name && errors.name && (
-                                    <Text className="font-[PoppinsRegular] text-sm mt-1 ml-3 text-red-500">{errors.name}</Text>
+                                    <Text 
+                                     style={{
+                                        textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left',
+                                        writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                                        }}
+                                    className="font-[PoppinsRegular] text-sm mt-1 ml-3 text-red-500">{errors.name}</Text>
                                 )}
                             </View>
                             <View>
-                                <Text className='text-[#000000] text-base font-medium font-[PoppinsRegular] ml-1 mb-1'>Email</Text>
+                                <Text 
+                                    style={{
+                                        lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 24,
+                                        textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left',
+                                        writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                                    }} 
+                                    className='text-[#000000] text-base font-medium font-[PoppinsRegular] ml-1 mb-1'>{i18n.t('email')}</Text>
                                 <Input
                                     variant="outline"
                                     size="md"
@@ -92,11 +117,22 @@ const EditProfileScreen = ({navigation}:IProfileNavigationProps) => {
                                     />
                                 </Input>
                                 {touched.email && errors.email && (
-                                    <Text className="font-[PoppinsRegular] text-sm mt-1 ml-3 text-red-500">{errors.email}</Text>
+                                    <Text 
+                                        style={{
+                                            textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left',
+                                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                                        }}
+                                        className="font-[PoppinsRegular] text-sm mt-1 ml-3 text-red-500">{errors.email}</Text>
                                 )}
                             </View>
                             <View>
-                                <Text className='text-[#000000] text-base font-medium font-[PoppinsRegular] ml-1 mb-1'>Phone Number</Text>
+                                <Text 
+                                 style={{
+                                    lineHeight: rtlLanguages.includes(i18n.locale) ? 52 : 24,
+                                    textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left',
+                                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                                }} 
+                                className='text-[#000000] text-base font-medium font-[PoppinsRegular] ml-1 mb-1'>{i18n.t('phone_number')}</Text>
                                 <Input
                                     variant="outline"
                                     size="md"
@@ -116,7 +152,12 @@ const EditProfileScreen = ({navigation}:IProfileNavigationProps) => {
                                     />
                                 </Input>
                                 {touched.phoneNumber && errors.phoneNumber && (
-                                    <Text className="font-[PoppinsRegular] text-sm mt-1 ml-3 text-red-500">{errors.phoneNumber}</Text>
+                                <Text 
+                                    style={{
+                                        textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left',
+                                        writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                                    }}
+                                    className="font-[PoppinsRegular] text-sm mt-1 ml-3 text-red-500">{errors.phoneNumber}</Text>
                                 )}
                             </View>
                         
@@ -124,8 +165,13 @@ const EditProfileScreen = ({navigation}:IProfileNavigationProps) => {
                                 isDisabled={!dirty||isUserLoading} 
                                 className="h-[66px] rounded-[7px]" 
                                 buttonTextStyles="text-[22px] uppercase" 
+                                buttonTextStylesObject={{
+                                    lineHeight: rtlLanguages.includes(i18n.locale) ? 45 : 30,
+                                    textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left',
+                                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                                }}
                                 onPress={()=>handleSubmit()} 
-                                title="Submit"
+                                title={i18n.t('submit')}
                             />
                         </View>
                     )}}

@@ -20,7 +20,7 @@ interface ILoginScreenProps {
 const LoginScreen = ({navigation}:ILoginScreenProps) => {
   const {login,isLoading} = useAuth()
   return (
-    <Layout>
+    <Layout isKeyboardAvoidingView>
       <View className="flex-1 items-center px-10 bg-white">
       <Image
           source={require('@/assets/images/logo-2.png')}

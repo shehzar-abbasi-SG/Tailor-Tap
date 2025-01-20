@@ -4,8 +4,8 @@ import { AppProvider } from "./context/AppProvider";
 import Main from "@/app/screens/Main";
 
 
-export default function App() {
 
+export default function App() {
   return (
       <AppProvider>
           <Main/>

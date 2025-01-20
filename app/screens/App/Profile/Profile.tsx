@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import Layout from '@/app/components/common/Layout'
 import Header from '@/app/components/common/Header'
 import { useAuth } from "@/app/context/AuthContext";
@@ -8,6 +8,7 @@ import { Button, ButtonText } from "@/app/components/ui/button";
 import { useUser } from "@/app/context/UserContext";
 import { ProfileStackParamList } from "@/app/types/navigation";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { rtlLanguages, useAppContext } from "@/app/context/AppProvider";
 
 type ProfileScreenNavigationProp = StackNavigationProp<ProfileStackParamList>;
 
@@ -18,6 +19,7 @@ interface IProfileNavigationProps {
 const ProfileScreen = ({navigation}:IProfileNavigationProps) => {
   const {logout} = useAuth()
   const {userDetails} = useUser()
+  const {i18n} = useAppContext()
   return (
     <Layout scrollable={false}>
       <View style={styles.container}>
@@ -41,17 +43,23 @@ const ProfileScreen = ({navigation}:IProfileNavigationProps) => {
               <Text className="text-[8px] text-[#606060] font-normal font-[PoppinsRegular] leading-[12px]">
                 {userDetails?.phoneNumber}
               </Text>
-              <Button onPress={()=>navigation.navigate('EditProfile')} className="border-[2px] border-[#38D55B] bg-transparent mt-[17px] rounded-full h-[23px] w-[75px] p-0 self-center">
-                  <ButtonText className="font-[PoppinsBold] font-bold text-[9px] leading-[13.5px] uppercase text-black">
-                    Edit Profile
-                  </ButtonText>
+              <Button onPress={()=>navigation.navigate('EditProfile')} className="border-[2px] border-[#38D55B] bg-transparent mt-[17px] rounded-full h-fit w-fit px-2 py-1 self-center">
+                  <Text 
+                    style={{
+                        textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left',
+                        writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                    }}
+                  className="font-[PoppinsBold] font-bold text-[9px] leading-[18px] uppercase text-black">
+                   {i18n.t('edit_profile')}
+                  </Text>
               </Button>
-              <Button className="border-[2px] border-[#38D55B] bg-transparent rounded-full h-[23px] w-[75px] p-0 mt-[17px]">
-                <ButtonText 
-                onPress={logout}
-                className="font-[PoppinsBold] font-bold text-[9px] leading-[13.5px] uppercase text-black">
-                  Logout
-                </ButtonText>
+              <Button className="border-[2px] border-[#38D55B] bg-transparent rounded-full h-fit w-fit px-3 py-1 mt-[17px]">
+                  <Text 
+                   style={{
+                    textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left',
+                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                  }}
+                  className="font-[PoppinsBold] font-bold text-[9px] leading-[18px] uppercase text-black text-center">{i18n.t('logout')}</Text>
               </Button>
             </View>
           </View>

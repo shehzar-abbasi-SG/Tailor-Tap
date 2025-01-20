@@ -27,7 +27,7 @@ const SignupScreen = ({navigation}:ISignupProps) => {
   const {signup,isLoading} = useAuth()
 
   return (
-    <Layout>
+    <Layout isKeyboardAvoidingView>
       <View className="flex-1 items-center px-10 bg-white">
         <Image
             source={require('@/assets/images/logo-2.png')}
@@ -45,7 +45,7 @@ const SignupScreen = ({navigation}:ISignupProps) => {
               phoneNumber: Yup.string()
               .required('Phone number is required')
               .matches(
-                /^(?:\+?92|0)?3\d{2}[ -]?\d{7}$/,
+                /^((\+92)|(92)|0)?(3[0-9]{2})[0-9]{7}$/,
                 'Phone number is not valid'
               ),
               password: Yup.string().min(6,'Password too short').required('Password is required.'),
@@ -259,7 +259,7 @@ const SignupScreen = ({navigation}:ISignupProps) => {
               </View>
               )}
           </Formik>
-        </View>
+      </View>
     </Layout>
   );
 };

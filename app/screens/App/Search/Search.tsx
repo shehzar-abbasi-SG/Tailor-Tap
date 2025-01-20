@@ -10,6 +10,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { SearchStackParamList } from "@/app/types/navigation";
 import { useCustomer } from "@/app/context/CustomerContext";
 import { Spinner } from "@/app/components/ui/spinner";
+import { rtlLanguages, useAppContext } from "@/app/context/AppProvider";
 
 type SearchScreenNavigationProp = StackNavigationProp<SearchStackParamList>;
 
@@ -21,6 +22,7 @@ const SearchScreen = ({navigation}:ISearchNavigationProps) => {
   const [query,setQuery] = useState("")
   const {customers,isCustomerLoading,searchCustomers,filteredCustomers,setFilteredCustomers,getCustomerById} = useCustomer()
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const {i18n} = useAppContext()
 
   const debouncedSearch = useCallback(
     (query: string) => {
@@ -55,13 +57,20 @@ const SearchScreen = ({navigation}:ISearchNavigationProps) => {
               size="md"
               className="bg-[#EAEAEA] px-[20px] rounded-full w-full h-[60px] focus:outline-none focus-within:ring-0 focus:border-transparent focus:ring-0"
             >
-              <AntDesignIcon name="search1" size={20} color={"#000"}/>
+              {!rtlLanguages.includes(i18n.locale) && 
+                <AntDesignIcon name="search1" size={20} color={"#000"}/>
+              }
               <InputField
-                placeholder="Enter a Name"
+                placeholder={i18n.t('enter_name')}
                 value={query}
                 onChangeText={(text)=>setQuery(text)}
-                className="text-base placeholder:text-[##585858] placeholder:text-[16px] placeholder:font-normal placeholder:font-[PoppinsRegular] placeholder:leading-[24px]"
+                className={`text-base placeholder:text-[##585858] placeholder:text-[16px] placeholder:font-normal placeholder:font-[PoppinsRegular] placeholder:leading-[24px]
+                   ${rtlLanguages.includes(i18n.locale)?"placeholder:text-right":"placeholder:text-left"} 
+                  `}
               />
+               {rtlLanguages.includes(i18n.locale) && 
+                <AntDesignIcon name="search1" size={20} color={"#000"}/>
+              }
           </Input>
            <ScrollView 
               contentContainerStyle={{ flexGrow: 1,paddingTop:48 }}
@@ -79,11 +88,18 @@ const SearchScreen = ({navigation}:ISearchNavigationProps) => {
                     <Text>{customer.fullName}</Text>
                     <Text>{customer.phoneNumber}</Text>
                   </View>
-                  <Button onPress={()=>{
-                    getCustomerById(customer._id,true)
-                  }} 
-                  title="Edit" className="mt-0 h-[39px] rounded-[6px]" 
-                  buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"  />
+                  <Button 
+                    onPress={()=>{
+                      getCustomerById(customer._id,true)
+                    }} 
+                    title={i18n.t('edit')} 
+                    className="mt-0 h-fit py-1 rounded-[6px]" 
+                    buttonTextStyles="text-[17px] leading-[25.5px] normal-case p-0 font-bold font-[PoppinsBold]"
+                    buttonTextStylesObject={{
+                      lineHeight: rtlLanguages.includes(i18n.locale) ? 37.5 : 25,
+                      writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                    }}
+                    />
                 </TouchableOpacity>
               ))}
             </>

@@ -6,6 +6,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { HomeStackParamList } from "@/app/types/navigation";
 import LottieView from 'lottie-react-native';
 import Button from "@/app/components/common/Button";
+import { rtlLanguages, useAppContext } from "@/app/context/AppProvider";
 
 type HomeScreenNavigationProp = StackNavigationProp<HomeStackParamList>;
 
@@ -13,7 +14,7 @@ interface IHomeNavigationProps {
     navigation: HomeScreenNavigationProp;
   }
 const CongratulationScreen = ({navigation}:IHomeNavigationProps) => {
-
+  const {i18n} = useAppContext()
   return (
     <Layout scrollable={false}>
       <View style={styles.container}>
@@ -23,9 +24,24 @@ const CongratulationScreen = ({navigation}:IHomeNavigationProps) => {
             loop
             style={styles.animation}
         />
-        <Text className="w-full text-center font-bold font-[PoppinsBold] text-[28px] leading-[42px] text-white uppercase">Congratulations!</Text>
-        <Text className="w-full text-center font-normal font-[PoppinsRegular] text-[23px] leading-[34.5px] text-white">You’ve completed your client informations</Text>
-        <Button className="w-full mt-[100px] h-[66px] rounded-[7px] bg-white" buttonTextStyles="text-[22px] leading-[33px] uppercase p-0 text-[#38D55B]" onPress={()=>{navigation.navigate('HomeMain')}} title="Ok"/>
+        <Text 
+        style={{
+          lineHeight: rtlLanguages.includes(i18n.locale) ? 65 : 42,
+          writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+      }}
+        className="w-full text-center font-bold font-[PoppinsBold] text-[28px] leading-[42px] text-white uppercase">{i18n.t('congratulations')}</Text>
+        <Text 
+        style={{
+          lineHeight: rtlLanguages.includes(i18n.locale) ? 65 : 34.5,
+          writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+      }}
+        className="w-full text-center font-normal font-[PoppinsRegular] text-[23px] leading-[34.5px] text-white">{i18n.t('client_info_completed')}</Text>
+        <Button 
+          buttonTextStylesObject={{
+            lineHeight: rtlLanguages.includes(i18n.locale) ? 65 : 34.5,
+            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+        }}
+        className="w-full mt-[100px] h-[66px] rounded-[7px] bg-white" buttonTextStyles="text-[22px] leading-[33px] uppercase p-0 text-[#38D55B]" onPress={()=>{navigation.navigate('HomeMain')}} title={i18n.t('ok')}/>
 
       </View>
     </Layout>
