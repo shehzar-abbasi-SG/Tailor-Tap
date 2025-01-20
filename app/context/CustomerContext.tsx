@@ -37,7 +37,7 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const mainNavigation = useNavigation<any>();
   const searchNavigation = useNavigation<SearchScreenNavigationProp>();
-  console.log('customers :>> ', customers);
+  // console.log('customers :>> ', customers);
 
   const getCustomers = async (): Promise<void> => {
     try {
@@ -119,6 +119,10 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       if(files) files.forEach((file) => {formData.append("images", file)});
       const response = await api.patch<BaseResponse<CustomerDetails>>(`/customer/${customerId}`, formData);
       const { success, data, message } = response.data;
+      console.log('data ===> ', data);
+      console.log('success ===> ', success);
+      console.log('message ===> ', message);
+
       if (!success) {
         showToast({ type: 'error', message: message ?? 'Failed to update customer' });
         return;

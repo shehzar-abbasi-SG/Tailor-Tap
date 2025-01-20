@@ -27,7 +27,6 @@ const EditDetail = ({navigation}:ISearchNavigationProps) => {
     const params:any = route.params
     const {i18n} = useAppContext()
 
-    console.log('params.isEditMode ===> ', params.isEditMode);
 
     const validationSchema = Yup.object({
         shoulder: Yup.number(),

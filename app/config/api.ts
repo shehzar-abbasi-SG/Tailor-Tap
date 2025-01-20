@@ -8,7 +8,7 @@ export const eventEmitter = new EventEmitter();
 //https://tailortap-server.onrender.com/
 // Create an Axios instance
 export const api = axios.create({
-  baseURL: 'https://tailortap-server.onrender.com/',
+  baseURL: '//https://tailortap-server.onrender.com/',
   timeout: 5000,
 });
 

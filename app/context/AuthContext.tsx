@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setisLoading(true)
 
       const response = await api.post<BaseResponse<LoginResponse>>('/auth/login', credentials);
-      console.log('response :>> ',response);
+      // console.log('response :>> ',response);
 
       const { success, data,message,errors } = response.data;
       if(!success) {

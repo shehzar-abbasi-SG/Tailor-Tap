@@ -36,7 +36,7 @@ const LoginScreen = ({navigation}:ILoginScreenProps) => {
           password: Yup.string().required('Password is required.'),
         })}
         onSubmit={(values) => {
-          console.log('values :>> ', values);
+          // console.log('values :>> ', values);
           login(values)
         }}>
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
