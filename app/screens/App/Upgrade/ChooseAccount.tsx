@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, TouchableHighlight, View } from 'react-native'
 import Layout from '@/app/components/common/Layout'
 import Header from '@/app/components/common/Header'
-import { useAppContext } from '@/app/context/AppProvider'
+import { rtlLanguages, useAppContext } from '@/app/context/AppProvider'
 import Heading from '@/app/components/common/Heading'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
@@ -27,7 +27,7 @@ const chooseAccount = [
     }
   
 function ChooseAccount({navigation}:IUpgradeNavigationProps) {
-    const {setShowUpgradeStack} = useAppContext()
+    const {setShowUpgradeStack,i18n} = useAppContext()
     const {setFormData} = useUpgradePlanFormContext()
     
     const {setFieldValue,errors,values,handleSubmit} = useFormik({
@@ -35,7 +35,7 @@ function ChooseAccount({navigation}:IUpgradeNavigationProps) {
         selectedBankAccount: '',
       } as PartialUpgradeFormData,
       validationSchema: Yup.object({
-        selectedBankAccount: Yup.string().required('Bank account selection is required'),
+        selectedBankAccount: Yup.string().required(i18n.t('bank_account_required')),
       }),
       onSubmit: (values) => {
         setFormData((prev)=>({...prev,...values}))
@@ -49,7 +49,12 @@ function ChooseAccount({navigation}:IUpgradeNavigationProps) {
           <Header displayMode='Upgrade' onBackPress={()=>{setShowUpgradeStack(false)}}/>
         </View>
         <View className='w-full flex items-center justify-center pt-[150px]'>
-          <Heading title='CHOOSE YOUR BANK ACCOUNT' className='w-[260px]' 
+          <Heading title={i18n.t('choose_bank_account')} className='w-[260px]' 
+           titleTextStylesObject={{
+              lineHeight: rtlLanguages.includes(i18n.locale) ? 80 : 33,
+              writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+              // textAlign:rtlLanguages.includes(i18n.locale) ? 'right' : 'left', 
+          }}
           titleStyles='text-center font-[PoppinsBold] font-bold text-[22px] leading-[33px] uppercase' underlineStyles='mt-1'/>
           <ScrollView 
            contentContainerStyle={{ flexGrow: 1,paddingTop:60 }}
@@ -60,6 +65,7 @@ function ChooseAccount({navigation}:IUpgradeNavigationProps) {
                 <TouchableHighlight underlayColor="#D5E8D6" 
                   onPress={()=> {
                     if(account.name==="Placeholder"){
+
                     }else setFieldValue("selectedBankAccount",account.id)
                   }} key={account.id} 
                   className={`flex flex-row items-center justify-between gap-x-[37px] relative
@@ -69,7 +75,10 @@ function ChooseAccount({navigation}:IUpgradeNavigationProps) {
                     <>
                         {account.name==="Placeholder"?
                         <View className='flex flex-row items-center justify-center w-full'>
-                          <Text className="text-[22px] font-medium font-[PoppinsMedium] leading-[33px] text-[#555555]">+Add another option</Text>
+                          <Text style={{
+                            lineHeight: rtlLanguages.includes(i18n.locale) ? 50 : 33,
+                            writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                          }} className="text-[22px] font-medium font-[PoppinsMedium] leading-[33px] text-[#555555]">+{i18n.t('add_another_option')}</Text>
                         </View>
                         :
                         <Image
@@ -86,17 +95,28 @@ function ChooseAccount({navigation}:IUpgradeNavigationProps) {
                     </>
                 </TouchableHighlight>
               ))}
-              {errors.selectedPlan && 
+              {errors.selectedBankAccount && 
                 <View className='mt-[-10px] w-full'>
-                    <Text className='text-left self-start font-[PoppinsRegular] text-sm text-red-500'>{errors.selectedPlan}</Text>
+                    <Text 
+                      style={{
+                          lineHeight: rtlLanguages.includes(i18n.locale) ? 30 : 20,
+                          writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                          marginLeft:rtlLanguages.includes(i18n.locale) ? 'auto' : 0, 
+    
+                        }}
+                    className='text-left self-start font-[PoppinsRegular] text-sm text-red-500'>{errors.selectedBankAccount}</Text>
                 </View>
               }
             </View>
             <View className='px-10 w-full pt-[50px]'>
-              <Button 
+            <Button 
+                buttonTextStylesObject={{
+                    lineHeight: rtlLanguages.includes(i18n.locale) ? 40 : 30,
+                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                  }}
                   className="mt-0 h-[72px] rounded-[4px] w-full" 
                   buttonTextStyles="text-[22px] leading-[33px] uppercase p-0" 
-                  onPress={()=>handleSubmit()} title="Next"/>
+                  onPress={()=>handleSubmit()} title={i18n.t('next')}/>
             </View>
           </ScrollView>
         </View>

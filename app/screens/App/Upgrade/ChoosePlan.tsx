@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import Layout from '@/app/components/common/Layout'
 import Header from '@/app/components/common/Header'
-import { useAppContext } from '@/app/context/AppProvider'
+import { rtlLanguages, useAppContext } from '@/app/context/AppProvider'
 import ListItem, { ListContainer } from '@/app/components/common/List'
 import Heading from '@/app/components/common/Heading'
 import { useFormik } from 'formik'
@@ -28,14 +28,14 @@ interface IUpgradeNavigationProps {
 
 
 function ChoosePlan({navigation}:IUpgradeNavigationProps) {
-  const {setShowUpgradeStack} = useAppContext()
+  const {setShowUpgradeStack,i18n} = useAppContext()
   const {setFormData} = useUpgradePlanFormContext()
     const {setFieldValue,errors,values,handleSubmit} = useFormik({
       initialValues: {
         selectedPlan: '',
       } as PartialUpgradeFormData,
       validationSchema: Yup.object({
-        selectedPlan: Yup.string().required('Plan selection is required'),
+        selectedPlan: Yup.string().required(i18n.t('plan_selection_required')),
       }),
       onSubmit: (values) => {
         setFormData((prev)=>({...prev,...values}))
@@ -63,8 +63,14 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
           </ListContainer>
         </View>
         <View className='w-full flex items-center justify-center pt-[280px]'>
-          <Heading title='Choose Your Plan:' className='w-[300px]' 
-          titleStyles='font-[PoppinsBold] font-bold text-[29px] leading-[43px] uppercase' underlineStyles='mt-1'/>
+          <Heading title={i18n.t('choose_your_plan')} className='w-[300px]' 
+          titleStyles='font-[PoppinsBold] font-bold text-[29px] leading-[43px] uppercase' underlineStyles='mt-1'
+           titleTextStylesObject={{
+              lineHeight: rtlLanguages.includes(i18n.locale) ? 80 : 43,
+              writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+              // textAlign:rtlLanguages.includes(i18n.locale) ? 'right' : 'left', 
+          }}
+          />
          <ScrollView
             horizontal={false} 
             showsHorizontalScrollIndicator={false} 
@@ -78,7 +84,7 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
             }}
             style={{
               overflow: 'hidden',
-              paddingHorizontal:20 // Ensure content stays inside bounds
+              paddingHorizontal:20 
             }}>
             <View className='flex items-center w-full gap-y-[20px]'>
               {choosePlans.map((plan)=>(
@@ -87,7 +93,7 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
                   className={`flex flex-row items-center justify-between border-[3px] gap-x-[37px] relative
                     ${plan.id===values.selectedPlan?"bg-[#D5E8D6] border-[#38D55B]":"bg-white border-transparent"} 
                     px-[27px] py-[21px] w-full rounded-[4px] h-[87px]`} 
-                  style={{boxShadow:"0px 0px 16.6px 0px #00000040"}}>
+                    style={{boxShadow:"0px 0px 16.6px 0px #00000040"}}>
                     <>
                       <Text className="font-[PoppinsBold] font-bold text-[17px] leading-[25.5px] ">{plan.title}</Text>
                       <View className='flex flex-row gap-x-[33px] h-full items-center'>
@@ -102,15 +108,26 @@ function ChoosePlan({navigation}:IUpgradeNavigationProps) {
               ))}
               {errors.selectedPlan && 
                 <View className='mt-[-10px] w-full'>
-                    <Text className='text-left self-start font-[PoppinsRegular] text-sm text-red-500'>{errors.selectedPlan}</Text>
+                    <Text 
+                    style={{
+                      lineHeight: rtlLanguages.includes(i18n.locale) ? 30 : 20,
+                      writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                      marginLeft:rtlLanguages.includes(i18n.locale) ? 'auto' : 0, 
+
+                    }}
+                    className='text-left self-start font-[PoppinsRegular] text-sm text-red-500'>{errors.selectedPlan}</Text>
                 </View>
               }
             </View>
             <View className='w-full pt-[50px]'>
-              <Button 
+            <Button 
+                buttonTextStylesObject={{
+                    lineHeight: rtlLanguages.includes(i18n.locale) ? 40 : 30,
+                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                  }}
                   className="mt-0 h-[72px] rounded-[4px] w-full" 
                   buttonTextStyles="text-[22px] leading-[33px] uppercase p-0" 
-                  onPress={()=>handleSubmit()} title="Next"/>
+                  onPress={()=>handleSubmit()} title={i18n.t('next')}/>
             </View>
           </ScrollView>
         </View>

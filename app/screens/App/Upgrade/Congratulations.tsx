@@ -6,7 +6,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { HomeStackParamList } from "@/app/types/navigation";
 import LottieView from 'lottie-react-native';
 import Button from "@/app/components/common/Button";
-import { useAppContext } from "@/app/context/AppProvider";
+import { rtlLanguages, useAppContext } from "@/app/context/AppProvider";
 
 type HomeScreenNavigationProp = StackNavigationProp<HomeStackParamList>;
 
@@ -14,7 +14,7 @@ interface IHomeNavigationProps {
     navigation: HomeScreenNavigationProp;
   }
 const CongratulationScreen = ({navigation}:IHomeNavigationProps) => {
-  const {setShowUpgradeStack} = useAppContext()
+  const {setShowUpgradeStack,i18n} = useAppContext()
 
   return (
     <Layout scrollable={false}>
@@ -25,11 +25,24 @@ const CongratulationScreen = ({navigation}:IHomeNavigationProps) => {
             loop
             style={styles.animation}
         />
-        <Text className="w-full text-center font-bold font-[PoppinsBold] text-[28px] leading-[42px] text-white uppercase">THANK YOU VERY MUCH!</Text>
-        <Text className="w-full text-center font-normal font-[PoppinsRegular] text-[23px] leading-[34.5px] text-white">Your Submitting has been done!</Text>
-        <Button className="w-full mt-[100px] h-[66px] rounded-[7px] bg-white" 
+        <Text 
+          style={{lineHeight: rtlLanguages.includes(i18n.locale) ? 65 : 42,
+                writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+            }}
+        className="w-full text-center font-bold font-[PoppinsBold] text-[28px] leading-[42px] text-white uppercase">{i18n.t('thank_you')}</Text>
+        <Text 
+        style={{lineHeight: rtlLanguages.includes(i18n.locale) ? 65 : 23,
+          writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+      }}
+        className="w-full text-center font-normal font-[PoppinsRegular] text-[23px] leading-[34.5px] text-white">{i18n.t('submission_done')}</Text>
+        <Button 
+         buttonTextStylesObject={{
+                    lineHeight: rtlLanguages.includes(i18n.locale) ? 65 : 34.5,
+                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                }}
+        className="w-full mt-[100px] h-[66px] rounded-[7px] bg-white" 
         buttonTextStyles="text-[22px] leading-[33px] uppercase p-0 text-[#38D55B]" onPress={()=>{setShowUpgradeStack(false)}} 
-        title="Done"/>
+        title={i18n.t('done')}/>
 
       </View>
     </Layout>

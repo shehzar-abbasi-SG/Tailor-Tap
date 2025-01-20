@@ -2,7 +2,7 @@ import React from 'react'
 import { Pressable, Text, TouchableHighlight, View } from 'react-native'
 import Layout from '@/app/components/common/Layout'
 import Header from '@/app/components/common/Header'
-import { useAppContext } from '@/app/context/AppProvider'
+import { rtlLanguages, useAppContext } from '@/app/context/AppProvider'
 import Heading from '@/app/components/common/Heading'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
@@ -23,7 +23,7 @@ interface IUpgradeNavigationProps {
   }
 
 function AccountInformation({navigation}:IUpgradeNavigationProps) {
-    const {setShowUpgradeStack} = useAppContext()
+    const {setShowUpgradeStack,i18n} = useAppContext()
     const {setFormData} = useUpgradePlanFormContext() 
         
     const {setFieldValue,errors,values,handleSubmit,touched,handleBlur,handleChange} = useFormik({
@@ -32,9 +32,9 @@ function AccountInformation({navigation}:IUpgradeNavigationProps) {
             image: null
         } as PartialUpgradeFormData,
         validationSchema: Yup.object({
-        transactionId: Yup.string().matches(/^\d+$/, 'Transaction ID must start with # followed by digits').required('Transaction ID is required'),
+        transactionId: Yup.string().matches(/^\d+$/, i18n.t('transaction_id_format')).required(i18n.t('transaction_id_required')),
         image: Yup.mixed<string>()
-        .required('Screenshot is required')
+        .required(i18n.t('screenshot_required'))
         }),
         onSubmit: (values) => {
         setFormData((prev)=>({...prev,...values}))
@@ -58,7 +58,12 @@ function AccountInformation({navigation}:IUpgradeNavigationProps) {
                 <Header displayMode='Upgrade' onBackPress={()=>{setShowUpgradeStack(false)}}/>
                 </View>
                 <View className='w-full flex items-center justify-center pt-[50px]'>
-                <Heading title='BANK ACCOUNT INFORMATION' className='w-[260px]' 
+                <Heading 
+                titleTextStylesObject={{
+                    lineHeight: rtlLanguages.includes(i18n.locale) ? 80 : 33,
+                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                }}
+                title={i18n.t('bank_account_information')} className='w-[260px]' 
                 titleStyles='text-center font-[PoppinsBold] font-bold text-[22px] leading-[33px] uppercase' underlineStyles='mt-[-2px]'/>
                 <ScrollView 
                     contentContainerStyle={{ flexGrow: 1,paddingTop:48 }}
@@ -66,7 +71,13 @@ function AccountInformation({navigation}:IUpgradeNavigationProps) {
                 >
                     <View className='flex items-center w-full gap-y-[30px] px-10'>
                         <View>
-                            <Text className='text-[#000000] text-base font-normal font-[PoppinsRegular] ml-1 mb-1'>Transaction ID</Text>
+                            <Text 
+                            style={{
+                                lineHeight: rtlLanguages.includes(i18n.locale) ? 35 : 24,
+                                writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr',
+                                textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left'
+                                }} 
+                            className='text-[#000000] text-base font-normal font-[PoppinsRegular] ml-1 mb-1'>{i18n.t('transaction_id')}</Text>
                             <Input
                                 variant="outline"
                                 size="md"
@@ -87,11 +98,24 @@ function AccountInformation({navigation}:IUpgradeNavigationProps) {
                             />
                             </Input>
                             {touched.transactionId && errors.transactionId && (
-                                <Text className="font-[PoppinsRegular] text-sm mt-1 ml-3 text-red-500">{errors.transactionId}</Text>
+                                <Text 
+                                style={{
+                                    lineHeight: rtlLanguages.includes(i18n.locale) ? 30 : 20,
+                                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                                    marginLeft:rtlLanguages.includes(i18n.locale) ? 'auto' : 0, 
+            
+                                }}
+                                className="font-[PoppinsRegular] text-sm mt-1 ml-3 text-red-500">{errors.transactionId}</Text>
                             )}
                         </View>
                         <Pressable onPress={pickImage} className='w-full flex gap-y-[17px]'>
-                            <Text className='text-[#000000] text-base font-normal font-[PoppinsRegular] ml-1 mb-1'>Upload Screenshot</Text>
+                            <Text 
+                              style={{
+                                lineHeight: rtlLanguages.includes(i18n.locale) ? 35 : 24,
+                                writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr',
+                                textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left'
+                                }} 
+                            className='text-[#000000] text-base font-normal font-[PoppinsRegular] ml-1 mb-1'>{i18n.t('upload_screenshot')}</Text>
                             <View className='bg-white w-full h-[202px] rounded-[4px] items-center justify-center flex gap-y-[17px] px-[60px]' style={{
                                 boxShadow:"0px 4px 8.2px 0px #00000066"
 
@@ -115,21 +139,39 @@ function AccountInformation({navigation}:IUpgradeNavigationProps) {
                                     />
                                 }
                               
-                                <Text className='text-center text-black leading-[21px] font-normal text-[14px] font-[PoppinsRegular]'>
-                                    Upload your <Text className='font-bold font-[PoppinsBold] text-[#38D55B]'>Screenshot</Text> here to confirm purchase
+                                <Text 
+                                   style={{
+                                    lineHeight: rtlLanguages.includes(i18n.locale) ? 35 : 24,
+                                    writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr',
+                                    textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left'
+                                    }} 
+                                className='text-center text-black leading-[21px] font-normal text-[14px] font-[PoppinsRegular]'>
+                                    {i18n.locale==='en'?`Upload your ${<Text className='font-bold font-[PoppinsBold] text-[#38D55B]'>Screenshot</Text>} here to confirm purchase`:
+                                    i18n.t('upload_screenshot_here')}
                                 </Text>
                             </View>
                             {touched.image && errors.image && (
-                            <Text className="font-[PoppinsRegular] text-sm mt-1 text-red-500">{errors.image}</Text>
+                            <Text 
+                            style={{
+                                lineHeight: rtlLanguages.includes(i18n.locale) ? 30 : 20,
+                                writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                                marginLeft:rtlLanguages.includes(i18n.locale) ? 'auto' : 0, 
+        
+                            }}
+                            className="font-[PoppinsRegular] text-sm mt-1 text-red-500">{errors.image}</Text>
                         )}
                         </Pressable>
                        
                     </View>
                     <View className='px-10 w-full pt-[50px]'>
                         <Button 
+                            buttonTextStylesObject={{
+                                lineHeight: rtlLanguages.includes(i18n.locale) ? 50 : 33,
+                                writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                            }}
                             className="mt-0 h-[65px] rounded-[4px] w-full" 
                             buttonTextStyles="text-[22px] leading-[33px] uppercase p-0" 
-                            onPress={()=>handleSubmit()} title="CONFIRM PURCHASE"/>
+                            onPress={()=>handleSubmit()} title={i18n.t('confirm_purchase')}/>
                     </View>
                 </ScrollView>
                 </View>

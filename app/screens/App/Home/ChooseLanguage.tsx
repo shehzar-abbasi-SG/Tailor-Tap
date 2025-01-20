@@ -46,7 +46,7 @@ const ChooseLanguage = ({closeLanguageSelectionView,languageSelectionView}:TChoo
         </TouchableHighlight>
        <Heading 
         titleTextStylesObject={{
-        lineHeight: rtlLanguages.includes(i18n.locale) ? 40 : 25,
+        lineHeight: rtlLanguages.includes(i18n.locale) ? 55 : 25,
         writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
        }}
        title={i18n.t('choose_language')}/>
@@ -56,7 +56,12 @@ const ChooseLanguage = ({closeLanguageSelectionView,languageSelectionView}:TChoo
                     boxShadow:"0px 4px 8.2px 0px #00000066"
                 }}>
                     <>
-                        <Text className="font-medium text-[24px] font-[InterMedium] leading-[29.05px]">{name}</Text>
+                        <Text className="font-medium text-[24px] font-[InterMedium] leading-[29.05px]"
+                        style={{
+                          lineHeight: rtlLanguages.includes(i18n.locale) ? 55 : 29.05,
+                          writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+                        }}
+                        >{name}</Text>
                         <View className={`bg-[#38D55B] rounded-full flex items-center justify-center flex-shrink-0 w-[30px] h-[30px] ${id===selectedLanguage?.id?"opacity-[1]":"opacity-[0]"} transition-opacity duration-200`}>
                             <AntDesignIcon  name="check" size={25}/>
                         </View>
@@ -64,7 +69,12 @@ const ChooseLanguage = ({closeLanguageSelectionView,languageSelectionView}:TChoo
                 </TouchableHighlight>
             ))}
             <Button onPress={handleContinue} className="mt-[10px] bg-[#38D55B] h-[65px] rounded-[4px]"  variant="solid" action="primary">
-              <ButtonText className="text-white font-[PoppinsBold] font-bold text-[22px] leading-[33px] uppercase text-center py-4">Continue</ButtonText>
+              <Text 
+              style={{
+                lineHeight: rtlLanguages.includes(i18n.locale) ? 45 : 33,
+                writingDirection: rtlLanguages.includes(i18n.locale) ? 'rtl' : 'ltr', 
+              }}
+              className="text-white font-[PoppinsBold] font-bold text-[22px] leading-[33px] uppercase text-center py-4">{i18n.t('continue')}</Text>
             </Button>
         </View>
     </View>

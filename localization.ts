@@ -62,18 +62,62 @@ export const translation = {
       "settings": "Settings", 
       "premium": "Premium", 
       "upgrade_to_premium": "Upgrade to Premium", 
+      "upgrade_now": "Upgrade now",
       "support": "Support", 
       "help_center": "Help center", 
       "contact_us": "Contact Us", 
       "upgrade_your_plan": "Upgrade your plan",
       "free_trial_message": "You're in your 7 days free trial",
       "switch_language": "Switch Language",
-      "choose_language": "Choose Language", // en
-"english": "English", // en
-"urdu": "Urdu", // en
-"sindhi": "Sindhi", // en
-"logout": "Logout", // en
+      "choose_language": "Choose Language", 
+      "english": "English", 
+      "urdu": "Urdu", 
+      "sindhi": "Sindhi", 
+      "logout": "Logout", 
+      "continue": "Continue", 
+      "thank_you": "THANK YOU VERY MUCH!", 
+     
 
+      "submission_done": "Your submitting has been done!", 
+      
+
+      "choose_your_plan": "Choose Your Plan", 
+
+
+      "bank_account_required": "Bank account selection is required", 
+      
+
+      "choose_bank_account": "CHOOSE YOUR BANK ACCOUNT", 
+
+
+      "add_another_option": "Add another option", 
+
+
+      "transaction_id_format": "Transaction ID must start with # followed by digits", 
+
+
+      "transaction_id_required": "Transaction ID is required", 
+
+
+      "screenshot_required": "Screenshot is required", 
+
+
+      "bank_account_information": "BANK ACCOUNT INFORMATION", 
+
+
+      "transaction_id": "Transaction ID", 
+  
+
+      "upload_screenshot": "Upload Screenshot", 
+
+
+      "upload_screenshot_here": "Upload your screenshot here to confirm purchase", // en
+
+      "confirm_purchase": "CONFIRM PURCHASE", 
+      "plan_selection_required": "Plan selection is required",
+
+
+      
 
     },
     "ur": {
@@ -139,17 +183,35 @@ export const translation = {
       "settings": "سیٹنگز", 
       "premium": "پریمیم", 
       "upgrade_to_premium": "پریمیم میں اپ گریڈ کریں", 
+      "upgrade_now": "ابھی اپ گریڈ کریں",
       "support": "سپورٹ", 
       "help_center": "مدد مرکز", 
       "contact_us": "ہم سے رابطہ کریں", 
       "upgrade_your_plan": "اپنے پلان کو اپ گریڈ کریں", 
       "free_trial_message": "آپ اپنے 7 دن کے مفت ٹرائل میں ہیں",
-      "switch_language": "زبان تبدیل کریں", // ur
-      "choose_language": "زبان منتخب کریں", // ur
-      "english": "انگریزی", // ur
-      "urdu": "اردو", // ur
-      "sindhi": "سندھی", // ur
-      "logout": "لاگ آؤٹ", // ur
+      "switch_language": "زبان تبدیل کریں",
+      "choose_language": "زبان منتخب کریں",
+      "english": "انگریزی",
+      "urdu": "اردو",
+      "sindhi": "سندھی",
+      "logout": "لاگ آؤٹ",
+      "continue": "جاری رکھیں",
+      "thank_you": "بہت شکریہ!", 
+      "submission_done": "آپ کی جمع کرانے کا عمل مکمل ہو گیا ہے!", 
+      "bank_account_required": "بینک اکاؤنٹ کا انتخاب ضروری ہے", 
+      "choose_your_plan": "اپنا پلان منتخب کریں",
+      "choose_bank_account": "اپنا بینک اکاؤنٹ منتخب کریں",
+      "add_another_option": "ایک اور آپشن شامل کریں", 
+      "transaction_id_format": "ٹرانزیکشن آئی ڈی کا آغاز # سے ہونا چاہیے جس کے بعد نمبر ہوں",
+      "transaction_id_required": "ٹرانزیکشن آئی ڈی ضروری ہے", 
+      "bank_account_information": "بینک اکاؤنٹ کی معلومات", 
+      "transaction_id": "ٹرانزیکشن آئی ڈی", 
+      "screenshot_required": "اسکرین شاٹ ضروری ہے", 
+      "upload_screenshot": "اسکرین شاٹ اپ لوڈ کریں", 
+      "confirm_purchase": "خریداری کی تصدیق کریں", 
+    "plan_selection_required": "پلان کا انتخاب ضروری ہے",
+"upload_screenshot_here": "اپنی اسکرین شاٹ یہاں اپ لوڈ کریں تاکہ خریداری کی تصدیق ہو سکے", // ur
+
     },
     "sd": {
       "add_new_member": "نئون ميمبر شامل ڪريو",
@@ -213,19 +275,34 @@ export const translation = {
       "settings": "سيٽنگون",
       "premium": "پريميئم",
       "upgrade_to_premium": "پريميئم ۾ اپ گريڊ ڪريو",
+    "upgrade_now": "هاڻي اپ گريڊ ڪريو",
       "support": "سپورٽ",
       "help_center": "مدد مرڪز",
       "contact_us": "اسان سان رابطو ڪريو",
       "upgrade_your_plan": "پنھنجي پلان کي اپ گريڊ ڪريو" ,
       "free_trial_message": "توهان 7 ڏينهن جي مفت آزمائش ۾ آهيو",
       "switch_language": "زبان تبديل ڪريو",
-"choose_language": "زبان چونڊيو",
-"english": "انگريزي",
-"urdu": "اردو",
-"sindhi": "سنڌي",
-"logout": "لاگ آئوٽ",
-
-
+      "choose_language": "زبان چونڊيو",
+      "english": "انگريزي",
+      "urdu": "اردو",
+      "sindhi": "سنڌي",
+      "logout": "لاگ آئوٽ",
+      "continue": "جاري رکو",
+      "thank_you": "تمام ٿورا!",
+      "submission_done": "توھان جي جمع ڪرائڻ مڪمل ٿي چڪي آھي!" ,
+      "bank_account_required": "بينڪ اڪائونٽ جو انتخاب ضروري آهي",
+      "choose_your_plan": "پنھنجو پلان چونڊيو" ,
+      "choose_bank_account": "پنھنجو بينڪ اڪائونٽ چونڊيو",
+      "add_another_option": "ھڪ ٻيو اختيار شامل ڪريو" ,
+      "transaction_id_format": "ٽرانزيڪشن ID کي # سان شروع ٿيڻ گھرجي، جنھن کانپوءِ انگ آھن",
+      "transaction_id_required": "ٽرانزيڪشن ID ضروري آھي" ,
+      "bank_account_information": "بينڪ اڪائونٽ جي معلومات" ,
+      "transaction_id": "ٽرانزيڪشن ID" ,
+      "screenshot_required": "اسڪرين شاٽ ضروري آھي",
+      "upload_screenshot": "اسڪرين شاٽ اپلوڊ ڪريو" ,
+      "confirm_purchase": "خريداري جي تصديق ڪريو" ,
+      "plan_selection_required": "پلان جو انتخاب ضروري آهي",
+"upload_screenshot_here": "پنھجو اسڪرين شاٽ هتي اپلوڊ ڪريو خريداري جي تصديق لاءِ" // sd
 
     }
   }
