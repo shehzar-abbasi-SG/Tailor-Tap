@@ -53,7 +53,7 @@ const ProfileScreen = ({navigation}:IProfileNavigationProps) => {
                    {i18n.t('edit_profile')}
                   </Text>
               </Button>
-              <Button className="border-[2px] border-[#38D55B] bg-transparent rounded-full h-fit w-fit px-3 py-1 mt-[17px]">
+              <Button onPress={logout} className="border-[2px] border-[#38D55B] bg-transparent rounded-full h-fit w-fit px-3 py-1 mt-[17px]">
                   <Text 
                    style={{
                     textAlign: rtlLanguages.includes(i18n.locale) ? 'right' : 'left',

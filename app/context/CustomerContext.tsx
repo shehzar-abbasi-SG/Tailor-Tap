@@ -37,7 +37,7 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const mainNavigation = useNavigation<any>();
   const searchNavigation = useNavigation<SearchScreenNavigationProp>();
-
+  console.log('customers :>> ', customers);
 
   const getCustomers = async (): Promise<void> => {
     try {
@@ -123,9 +123,7 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         showToast({ type: 'error', message: message ?? 'Failed to update customer' });
         return;
       }
-      setCustomers((prev) =>
-        prev ? prev.map((customer) => (customer._id === customerId ? data : customer)) : null
-      );
+      searchNavigation.navigate('SearchMain')
       showToast({ type: 'success', message: 'Customer updated successfully' });
     } catch (error) {
       handleError(error, 'Failed to update customer');
@@ -159,13 +157,14 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         data: { imageUrl },
       });
       const { success, data, message } = response.data;
-
+      
       if (!success) {
         showToast({ type: 'error', message: message || 'Failed to delete image.' });
         return;
       }
 
       showToast({ type: 'success', message: 'Image deleted successfully.' });
+      searchNavigation.navigate('SearchMain')
     } catch (error) {
       console.log('Error deleting customer image:', error);
       handleError(error, 'Failed to delete image');
